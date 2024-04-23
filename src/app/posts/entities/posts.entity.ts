@@ -1,15 +1,24 @@
 import WordpressService from "../../../infra/wordpress/service";
 
 class PostsEntity {
-  constructor(categorySlug?: string) {
+  private slug: string;
+  private categorySlug: string;
+
+  constructor(categorySlug: string | null, slug: string | null) {
+    this.slug = slug || "";
     this.categorySlug = categorySlug || "";
   }
 
-  private categorySlug: string;
+  async getPostsByCategory() {
+    const postList = await WordpressService.getPostsByCategory(
+      this.categorySlug
+    );
+    return postList;
+  }
 
-  async get() {
-    const posts = await WordpressService.getPostsByCategory(this.categorySlug);
-    return posts;
+  async getPostBySlug() {
+    const post = await WordpressService.getPostBySlug(this.slug);
+    return post;
   }
 }
 

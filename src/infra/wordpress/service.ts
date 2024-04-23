@@ -1,12 +1,19 @@
 import { fetchApi } from "../../app/utils/fetch-api";
-import { postListSchema } from "../../app/schemas/posts.schema";
+import { postListSchema, postSchema } from "../../app/schemas/posts.schema";
 
 class WordpressService {
   public async getPostsByCategory(categorySlug: string) {
-    const test = await fetchApi<typeof postListSchema._type>(
+    const postListData = await fetchApi<typeof postListSchema._type>(
       `/posts?category=${categorySlug}`
     );
-    return test;
+    return postListData;
+  }
+
+  public async getPostBySlug(slug: string) {
+    const postData = await fetchApi<typeof postSchema._type>(
+      `/posts/slug:${slug}`
+    );
+    return postData;
   }
 }
 
