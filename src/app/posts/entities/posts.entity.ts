@@ -1,4 +1,4 @@
-import { WordpressService } from "../../../infra/wordpress/service";
+import WordpressService from "../../../infra/wordpress/service";
 
 class PostsEntity {
   constructor(categorySlug?: string) {
@@ -7,7 +7,7 @@ class PostsEntity {
 
   private categorySlug: string;
 
-  async getByCategory() {
+  async get() {
     const posts = await WordpressService.getPostsByCategory(this.categorySlug);
     return posts;
   }
