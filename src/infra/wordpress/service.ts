@@ -1,5 +1,5 @@
 import { fetchApi } from "../../app/utils/fetch-api";
-import { postListSchema } from "../../app/schemas/post-list.schema";
+import { postListSchema } from "../../app/schemas/posts.schema";
 
 class WordpressService {
   public async getPostsByCategory(categorySlug: string) {

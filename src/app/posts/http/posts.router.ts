@@ -2,7 +2,7 @@ import z from "zod";
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import postsController from "../controllers/posts.controller";
-import { postListSchema } from "../../schemas/post-list.schema";
+import { postListSchema } from "../../schemas/posts.schema";
 
 export async function postsRouter(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
