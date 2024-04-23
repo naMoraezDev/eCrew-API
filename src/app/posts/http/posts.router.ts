@@ -9,6 +9,10 @@ export async function postsRouter(app: FastifyInstance) {
     "/posts/:categorySlug",
     {
       schema: {
+        tags: ["posts"],
+        summary: "Get posts by category",
+        description: "Get a post list by a category slug or name",
+
         params: z.object({
           categorySlug: z.string(),
         }),

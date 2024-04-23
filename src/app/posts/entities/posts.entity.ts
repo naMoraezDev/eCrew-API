@@ -7,7 +7,7 @@ class PostsEntity {
 
   private categorySlug: string;
 
-  async getByCategory() {
+  async get() {
     const posts = await WordpressService.getPostsByCategory(this.categorySlug);
     return posts;
   }
