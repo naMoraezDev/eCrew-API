@@ -1,4 +1,4 @@
-import { WordpressService } from "../../../infra/wordpress/service";
+import WordpressService from "../../../infra/wordpress/service";
 
 class PostsEntity {
   constructor(categorySlug?: string) {
