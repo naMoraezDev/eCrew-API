@@ -1,11 +1,10 @@
 import z from "zod";
 import { FastifyInstance } from "fastify";
-import { ZodTypeProvider } from "fastify-type-provider-zod";
 import postsController from "../controllers/posts.controller";
 import { postListSchema, postSchema } from "../../schemas/posts.schema";
 
 export async function postsRouter(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().get(
+  app.get(
     "/posts/:categorySlug",
     {
       schema: {
@@ -25,7 +24,7 @@ export async function postsRouter(app: FastifyInstance) {
     }
   );
 
-  app.withTypeProvider<ZodTypeProvider>().get(
+  app.get(
     "/posts/post/:slug",
     {
       schema: {

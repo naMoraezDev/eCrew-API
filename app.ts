@@ -4,13 +4,19 @@ import {
   serializerCompiler,
   jsonSchemaTransform,
 } from "fastify-type-provider-zod";
+import fastifyCors from "@fastify/cors";
 import packageJSON from "./package.json";
 import routes from "./src/infra/http/routes";
 import fastifySwagger from "@fastify/swagger";
 import { fastifyExpress } from "@fastify/express";
 import fastifySwaggerUI from "@fastify/swagger-ui";
+import { ZodTypeProvider } from "fastify-type-provider-zod";
 
-const app = fastify();
+const app = fastify().withTypeProvider<ZodTypeProvider>();
+
+app.register(fastifyCors, {
+  origin: "*",
+});
 
 app.register(fastifySwagger, {
   swagger: {
