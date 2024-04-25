@@ -1,7 +1,7 @@
 import { PostFactory } from "../../utils/posts-factory";
 import WordpressService from "../../../infra/wordpress/service";
 
-class PostsEntity {
+export class PostsEntity {
   private slug: string;
   private categorySlug: string;
 
@@ -24,5 +24,3 @@ class PostsEntity {
     return post;
   }
 }
-
-export default PostsEntity;

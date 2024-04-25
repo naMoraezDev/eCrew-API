@@ -1,7 +1,7 @@
 import { FastifyRequest } from "fastify";
-import PostsEntity from "../entities/posts.entity";
+import { PostsEntity } from "../entities/posts.entity";
 
-class PostsController {
+export class PostsController {
   getPostsByCategory(request: FastifyRequest) {
     const params = request.params as { categorySlug: string };
     const { categorySlug } = params;
@@ -14,5 +14,3 @@ class PostsController {
     return new PostsEntity(null, slug).getPostBySlug();
   }
 }
-
-export default new PostsController();

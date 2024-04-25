@@ -20,9 +20,9 @@ app.register(fastifyCors, {
 
 app.register(fastifySwagger, {
   swagger: {
+    schemes: ["http", "https"],
     consumes: ["application/json"],
     produces: ["application/json"],
-    schemes: ["http", "https"],
     info: {
       title: "ePost API",
       version: packageJSON.version ?? "1.0.0",

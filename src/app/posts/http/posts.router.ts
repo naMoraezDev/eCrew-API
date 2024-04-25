@@ -1,7 +1,7 @@
 import z from "zod";
 import { FastifyInstance } from "fastify";
-import postsController from "../controllers/posts.controller";
 import { postSchema } from "../../../infra/schemas/post.schema";
+import { PostsController } from "../controllers/posts.controller";
 import { postListSchema } from "../../../infra/schemas/post-list.schema";
 
 export async function postsRouter(app: FastifyInstance) {
@@ -20,7 +20,7 @@ export async function postsRouter(app: FastifyInstance) {
       },
     },
     async (request, reply) => {
-      const posts = await postsController.getPostsByCategory(request);
+      const posts = await new PostsController().getPostsByCategory(request);
       return reply.status(200).send(posts);
     }
   );
@@ -40,7 +40,7 @@ export async function postsRouter(app: FastifyInstance) {
       },
     },
     async (request, reply) => {
-      const post = await postsController.getPostBySlug(request);
+      const post = await new PostsController().getPostBySlug(request);
       return reply.status(200).send(post);
     }
   );
