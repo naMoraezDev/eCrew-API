@@ -1,4 +1,5 @@
-import { postListSchema, postSchema } from "../schemas/posts.schema";
+import { postSchema } from "../../infra/schemas/post.schema";
+import { postListSchema } from "../../infra/schemas/post-list.schema";
 
 interface PostFactoryInterface {
   formatPostListData(

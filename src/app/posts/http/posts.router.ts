@@ -1,7 +1,8 @@
 import z from "zod";
 import { FastifyInstance } from "fastify";
 import postsController from "../controllers/posts.controller";
-import { postListSchema, postSchema } from "../../schemas/posts.schema";
+import { postSchema } from "../../../infra/schemas/post.schema";
+import { postListSchema } from "../../../infra/schemas/post-list.schema";
 
 export async function postsRouter(app: FastifyInstance) {
   app.get(

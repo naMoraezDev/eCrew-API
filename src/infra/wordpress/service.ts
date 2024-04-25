@@ -1,5 +1,9 @@
+import { tagSchema } from "../schemas/tag.schema";
+import { postSchema } from "../schemas/post.schema";
 import { fetchApi } from "../../app/utils/fetch-api";
-import { postListSchema, postSchema } from "../../app/schemas/posts.schema";
+import { tagListSchema } from "../schemas/tag-list.shema";
+import { categorySchema } from "../schemas/category.schema";
+import { postListSchema } from "../schemas/post-list.schema";
 
 class WordpressService {
   public async getPostsByCategory(categorySlug: string) {
@@ -14,6 +18,25 @@ class WordpressService {
       `/posts/slug:${slug}`
     );
     return postData;
+  }
+
+  public async getCategoryBySlug(slug: string) {
+    const categoriesData = await fetchApi<typeof categorySchema._type>(
+      `/categories/slug:${slug}`
+    );
+    return categoriesData;
+  }
+
+  public async getTags() {
+    const tagsData = await fetchApi<typeof tagListSchema._type>("/tags");
+    return tagsData;
+  }
+
+  public async getTagBySlug(slug: string) {
+    const tagData = await fetchApi<typeof tagSchema._type>(
+      `/tags/slug:${slug}`
+    );
+    return tagData;
   }
 }
 

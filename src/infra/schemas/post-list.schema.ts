@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const postListSchema = z.object({
+export const postListSchema = z.object({
   found: z.number(),
   posts: z.array(
     z.object({
@@ -87,84 +87,3 @@ const postListSchema = z.object({
     wpcom: z.boolean(),
   }),
 });
-
-const postSchema = z.object({
-  ID: z.number(),
-  site_ID: z.number(),
-  author: z.object({
-    ID: z.number(),
-    login: z.string(),
-    email: z.boolean(),
-    name: z.string(),
-    first_name: z.string(),
-    last_name: z.string(),
-    nice_name: z.string(),
-    URL: z.string(),
-    avatar_URL: z.string(),
-    profile_URL: z.string(),
-    site_ID: z.number(),
-  }),
-  date: z.string(),
-  modified: z.string(),
-  title: z.string(),
-  URL: z.string(),
-  short_URL: z.string(),
-  content: z.string(),
-  excerpt: z.string(),
-  slug: z.string(),
-  guid: z.string(),
-  status: z.string(),
-  sticky: z.boolean(),
-  password: z.string(),
-  parent: z.boolean(),
-  type: z.string(),
-  discussion: z.object({
-    comments_open: z.boolean(),
-    comment_status: z.string(),
-    pings_open: z.boolean(),
-    ping_status: z.string(),
-    comment_count: z.number(),
-  }),
-  likes_enabled: z.boolean(),
-  sharing_enabled: z.boolean(),
-  like_count: z.number(),
-  i_like: z.boolean(),
-  is_reblogged: z.boolean(),
-  is_following: z.boolean(),
-  global_ID: z.string(),
-  featured_image: z.string(),
-  post_thumbnail: z.null(),
-  format: z.string(),
-  geo: z.boolean(),
-  menu_order: z.number(),
-  page_template: z.string(),
-  publicize_URLs: z.array(z.unknown()),
-  terms: z.object({
-    category: z.any(),
-    post_tag: z.object({}),
-    post_format: z.object({}),
-    mentions: z.object({}),
-  }),
-  tags: z.object({}),
-  categories: z.any(),
-  attachments: z.object({}),
-  attachment_count: z.number(),
-  metadata: z.array(z.unknown()),
-  meta: z.object({
-    links: z.object({
-      self: z.string(),
-      help: z.string(),
-      site: z.string(),
-      replies: z.string(),
-      likes: z.string(),
-    }),
-  }),
-  capabilities: z.object({
-    publish_post: z.boolean(),
-    delete_post: z.boolean(),
-    edit_post: z.boolean(),
-  }),
-  other_URLs: z.object({}),
-});
-
-export { postListSchema, postSchema };
