@@ -1,11 +1,11 @@
+import { fetchApi } from "../utils/fetch-api";
 import { tagSchema } from "../schemas/tag.schema";
 import { postSchema } from "../schemas/post.schema";
-import { fetchApi } from "../../app/utils/fetch-api";
 import { tagListSchema } from "../schemas/tag-list.shema";
 import { categorySchema } from "../schemas/category.schema";
 import { postListSchema } from "../schemas/post-list.schema";
 
-class WordpressService {
+export class WordpressService {
   public async getPostsByCategory(categorySlug: string) {
     const postListData = await fetchApi<typeof postListSchema._type>(
       `/posts?category=${categorySlug}`
@@ -39,5 +39,3 @@ class WordpressService {
     return tagData;
   }
 }
-
-export default new WordpressService();

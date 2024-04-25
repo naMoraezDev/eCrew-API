@@ -2,15 +2,15 @@ import { FastifyRequest } from "fastify";
 import { PostsEntity } from "../entities/posts.entity";
 
 export class PostsController {
-  getPostsByCategory(request: FastifyRequest) {
+  public async getPostsByCategory(request: FastifyRequest) {
     const params = request.params as { categorySlug: string };
     const { categorySlug } = params;
-    return new PostsEntity(categorySlug, null).getPostsByCategory();
+    return await new PostsEntity(categorySlug, null).getPostsByCategory();
   }
 
-  getPostBySlug(request: FastifyRequest) {
+  public async getPostBySlug(request: FastifyRequest) {
     const params = request.params as { slug: string };
     const { slug } = params;
-    return new PostsEntity(null, slug).getPostBySlug();
+    return await new PostsEntity(null, slug).getPostBySlug();
   }
 }

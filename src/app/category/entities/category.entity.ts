@@ -1,4 +1,4 @@
-import WordpressService from "../../../infra/wordpress/service";
+import { WordpressService } from "../../../infra/wordpress/service";
 
 export class CategoryEntity {
   private slug: string;
@@ -8,7 +8,7 @@ export class CategoryEntity {
   }
 
   public async getCategoryBySlug() {
-    const category = await WordpressService.getCategoryBySlug(this.slug);
+    const category = await new WordpressService().getCategoryBySlug(this.slug);
     return category;
   }
 }
