@@ -55,45 +55,13 @@ const postListSchema = z.object({
       page_template: z.string(),
       publicize_URLs: z.array(z.unknown()),
       terms: z.object({
-        category: z.object({
-          FIFA: z.object({
-            ID: z.number(),
-            name: z.string(),
-            slug: z.string(),
-            description: z.string(),
-            post_count: z.number(),
-            parent: z.number(),
-            meta: z.object({
-              links: z.object({
-                self: z.string(),
-                help: z.string(),
-                site: z.string(),
-              }),
-            }),
-          }),
-        }),
+        category: z.any(),
         post_tag: z.object({}),
         post_format: z.object({}),
         mentions: z.object({}),
       }),
       tags: z.object({}),
-      categories: z.object({
-        FIFA: z.object({
-          ID: z.number(),
-          name: z.string(),
-          slug: z.string(),
-          description: z.string(),
-          post_count: z.number(),
-          parent: z.number(),
-          meta: z.object({
-            links: z.object({
-              self: z.string(),
-              help: z.string(),
-              site: z.string(),
-            }),
-          }),
-        }),
-      }),
+      categories: z.any(),
       attachments: z.object({}),
       attachment_count: z.number(),
       metadata: z.array(z.unknown()),
@@ -172,45 +140,13 @@ const postSchema = z.object({
   page_template: z.string(),
   publicize_URLs: z.array(z.unknown()),
   terms: z.object({
-    category: z.object({
-      "Sem categoria": z.object({
-        ID: z.number(),
-        name: z.string(),
-        slug: z.string(),
-        description: z.string(),
-        post_count: z.number(),
-        parent: z.number(),
-        meta: z.object({
-          links: z.object({
-            self: z.string(),
-            help: z.string(),
-            site: z.string(),
-          }),
-        }),
-      }),
-    }),
+    category: z.any(),
     post_tag: z.object({}),
     post_format: z.object({}),
     mentions: z.object({}),
   }),
   tags: z.object({}),
-  categories: z.object({
-    "Sem categoria": z.object({
-      ID: z.number(),
-      name: z.string(),
-      slug: z.string(),
-      description: z.string(),
-      post_count: z.number(),
-      parent: z.number(),
-      meta: z.object({
-        links: z.object({
-          self: z.string(),
-          help: z.string(),
-          site: z.string(),
-        }),
-      }),
-    }),
-  }),
+  categories: z.any(),
   attachments: z.object({}),
   attachment_count: z.number(),
   metadata: z.array(z.unknown()),

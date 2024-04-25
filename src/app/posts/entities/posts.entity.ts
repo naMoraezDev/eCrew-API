@@ -1,3 +1,4 @@
+import { PostFactory } from "../../utils/posts-factory";
 import WordpressService from "../../../infra/wordpress/service";
 
 class PostsEntity {
@@ -10,14 +11,16 @@ class PostsEntity {
   }
 
   async getPostsByCategory() {
-    const postList = await WordpressService.getPostsByCategory(
+    const postListResponse = await WordpressService.getPostsByCategory(
       this.categorySlug
     );
+    const postList = new PostFactory().formatPostListData(postListResponse);
     return postList;
   }
 
   async getPostBySlug() {
-    const post = await WordpressService.getPostBySlug(this.slug);
+    const postResponse = await WordpressService.getPostBySlug(this.slug);
+    const post = new PostFactory().formatPostData(postResponse);
     return post;
   }
 }
