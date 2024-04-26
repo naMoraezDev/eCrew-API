@@ -1,3 +1,4 @@
+import pug from "pug";
 import fastify from "fastify";
 import {
   validatorCompiler,
@@ -5,6 +6,7 @@ import {
   jsonSchemaTransform,
 } from "fastify-type-provider-zod";
 import fastifyCors from "@fastify/cors";
+import fastifyView from "@fastify/view";
 import packageJSON from "./package.json";
 import routes from "./src/infra/http/routes";
 import fastifySwagger from "@fastify/swagger";
@@ -14,8 +16,20 @@ import { ZodTypeProvider } from "fastify-type-provider-zod";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
+app.register(fastifyView, {
+  engine: {
+    pug,
+  },
+});
+
 app.register(fastifyCors, {
   origin: "*",
+});
+
+app.get("/", async (_request, reply) => {
+  return reply.view("./views/index.pug", {
+    title: "ePost API",
+  });
 });
 
 app.register(fastifySwagger, {
