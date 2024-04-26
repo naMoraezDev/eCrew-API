@@ -8,6 +8,12 @@ export class PostsController {
     return await new PostsEntity(categorySlug, null).getPostsByCategory();
   }
 
+  public async getPostsByTag(request: FastifyRequest) {
+    const params = request.params as { slug: string };
+    const { slug } = params;
+    return await new PostsEntity(null, slug).getPostsByTag();
+  }
+
   public async getPostBySlug(request: FastifyRequest) {
     const params = request.params as { slug: string };
     const { slug } = params;

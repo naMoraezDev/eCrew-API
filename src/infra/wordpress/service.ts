@@ -13,6 +13,13 @@ export class WordpressService {
     return postListData;
   }
 
+  public async getPostsByTag(tag: string) {
+    const postListData = await fetchApi<typeof postListSchema._type>(
+      `/posts?tag=${tag}`
+    );
+    return postListData;
+  }
+
   public async getPostBySlug(slug: string) {
     const postData = await fetchApi<typeof postSchema._type>(
       `/posts/slug:${slug}`

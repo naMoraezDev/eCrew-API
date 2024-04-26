@@ -26,6 +26,26 @@ export async function postsRouter(app: FastifyInstance) {
   );
 
   app.get(
+    "/posts/tag/:slug",
+    {
+      schema: {
+        tags: ["posts"],
+        summary: "Get a list of matching posts (by tag slug).",
+        params: z.object({
+          slug: z.string(),
+        }),
+        response: {
+          200: postListSchema,
+        },
+      },
+    },
+    async (request, reply) => {
+      const posts = await new PostsController().getPostsByTag(request);
+      return reply.status(200).send(posts);
+    }
+  );
+
+  app.get(
     "/posts/post/:slug",
     {
       schema: {

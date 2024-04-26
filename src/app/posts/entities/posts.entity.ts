@@ -18,6 +18,14 @@ export class PostsEntity {
     return postList;
   }
 
+  public async getPostsByTag() {
+    const postListResponse = await new WordpressService().getPostsByTag(
+      this.slug
+    );
+    const postList = new PostFactory().formatPostListData(postListResponse);
+    return postList;
+  }
+
   public async getPostBySlug() {
     const postResponse = await new WordpressService().getPostBySlug(this.slug);
     const post = new PostFactory().formatPostData(postResponse);
