@@ -8,14 +8,19 @@ import {
 } from "fastify-type-provider-zod";
 import fastifyCors from "@fastify/cors";
 import fastifyView from "@fastify/view";
-import routes from "./infra/http/routes";
-import packageJSON from "../package.json";
+import routes from "./src/infra/http/routes";
+import packageJSON from "./package.json";
 import fastifySwagger from "@fastify/swagger";
 import { fastifyExpress } from "@fastify/express";
 import fastifySwaggerUI from "@fastify/swagger-ui";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
+
+app.register(require("@fastify/static"), {
+  root: path.join(__dirname, "public"),
+  prefix: "/public/",
+});
 
 app.register(fastifyView, {
   engine: {
@@ -28,7 +33,7 @@ app.register(fastifyCors, {
 });
 
 app.get("/", async (_request, reply) => {
-  return reply.view(path.join("src", "views", "index.pug"), {
+  return reply.view(path.join("public", "views", "index.pug"), {
     title: "ePost API",
   });
 });
