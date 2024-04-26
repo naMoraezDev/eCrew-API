@@ -8,8 +8,8 @@ import {
 } from "fastify-type-provider-zod";
 import fastifyCors from "@fastify/cors";
 import fastifyView from "@fastify/view";
-import routes from "./src/infra/http/routes";
 import packageJSON from "./package.json";
+import routes from "./src/infra/http/routes";
 import fastifySwagger from "@fastify/swagger";
 import { fastifyExpress } from "@fastify/express";
 import fastifySwaggerUI from "@fastify/swagger-ui";
@@ -32,9 +32,11 @@ app.register(fastifyCors, {
   origin: "*",
 });
 
-app.get("/", async (_request, reply) => {
+app.get("/", async (request, reply) => {
   return reply.view(path.join("public", "views", "index.pug"), {
     title: "ePost API",
+    version: packageJSON.version,
+    docs: `${request.protocol}://${request.hostname}/docs`,
   });
 });
 
