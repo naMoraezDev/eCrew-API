@@ -1,7 +1,6 @@
 extends layout
 
 block content
-  h1= title
-  p version #{version}
-  p Check #{docs} for full documentation.
+  h1 #{title} <span>v#{version}</span>
+  p Check <a href="#{docs}">#{docs}</a> for full documentation.
   

@@ -3,6 +3,10 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+span {
+  font-size: 14px;
+}
+
 a {
   color: #00B7FF;
 }
