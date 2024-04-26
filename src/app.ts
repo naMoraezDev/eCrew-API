@@ -7,8 +7,8 @@ import {
 } from "fastify-type-provider-zod";
 import fastifyCors from "@fastify/cors";
 import fastifyView from "@fastify/view";
-import packageJSON from "./package.json";
-import routes from "./src/infra/http/routes";
+import packageJSON from "../package.json";
+import routes from "./infra/http/routes";
 import fastifySwagger from "@fastify/swagger";
 import { fastifyExpress } from "@fastify/express";
 import fastifySwaggerUI from "@fastify/swagger-ui";
@@ -27,7 +27,7 @@ app.register(fastifyCors, {
 });
 
 app.get("/", async (_request, reply) => {
-  return reply.view("./views/index.pug", {
+  return reply.view("/src/views/index.pug", {
     title: "ePost API",
   });
 });

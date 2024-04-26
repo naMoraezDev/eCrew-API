@@ -1,5 +1,5 @@
+import app from "../src/app";
 import { normalize } from "path";
-import app from "../app";
 
 const port = Number(normalize(process.env.PORT || "3333"));
 
