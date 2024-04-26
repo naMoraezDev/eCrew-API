@@ -47,7 +47,7 @@ app.register(fastifySwagger, {
     produces: ["application/json"],
     info: {
       title: "ePosts API",
-      version: packageJSON.version ?? "1.0.0",
+      version: packageJSON.version,
     },
   },
   transform: jsonSchemaTransform,
