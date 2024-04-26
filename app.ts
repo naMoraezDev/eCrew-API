@@ -34,7 +34,7 @@ app.register(fastifyCors, {
 
 app.get("/", async (request, reply) => {
   return reply.view(path.join("public", "views", "index.pug"), {
-    title: "ePost API",
+    title: "ePosts API",
     version: packageJSON.version,
     docs: `${request.protocol}://${request.hostname}/docs`,
   });
@@ -46,7 +46,7 @@ app.register(fastifySwagger, {
     consumes: ["application/json"],
     produces: ["application/json"],
     info: {
-      title: "ePost API",
+      title: "ePosts API",
       version: packageJSON.version ?? "1.0.0",
     },
   },
