@@ -17,61 +17,75 @@ interface WordpressProtocol {
 }
 
 export class Wordpress implements WordpressProtocol {
-  private readonly baseUrl: string =
-    process.env.PRIVATE_WORDPRESS_API_URL ?? "";
-
   constructor(readonly httpClient: HttpClient) {
     this.httpClient = httpClient;
   }
 
   public async getPostsByCategory(categorySlug: string) {
-    const postListData = await this.httpClient.request({
-      url: `${this.baseUrl}/posts?category=${categorySlug}`,
-      method: "GET",
+    const postListData = await this.httpClient.request<
+      typeof postListSchema._type
+    >({
+      input: `/posts?category=${categorySlug}`,
+      init: {
+        method: "GET",
+      },
     });
     return postListData;
   }
 
   public async getTags() {
-    const tagListData: typeof tagListSchema._type =
-      await this.httpClient.request({
-        url: `${this.baseUrl}/tags`,
+    const tagListData = await this.httpClient.request<
+      typeof tagListSchema._type
+    >({
+      input: "/tags",
+      init: {
         method: "GET",
-      });
+      },
+    });
     return tagListData;
   }
 
   public async getTagBySlug(slug: string) {
-    const tagData: typeof tagSchema._type = await this.httpClient.request({
-      url: `${this.baseUrl}/tags/slug:${slug}`,
-      method: "GET",
+    const tagData = await this.httpClient.request<typeof tagSchema._type>({
+      input: `/tags/slug:${slug}`,
+      init: {
+        method: "GET",
+      },
     });
     return tagData;
   }
 
   public async getPostBySlug(slug: string) {
-    const postData: typeof postSchema._type = await this.httpClient.request({
-      url: `${this.baseUrl}/posts/slug:${slug}`,
-      method: "GET",
+    const postData = await this.httpClient.request<typeof postSchema._type>({
+      input: `/posts/slug:${slug}`,
+      init: {
+        method: "GET",
+      },
     });
     return postData;
   }
 
   public async getPostsByTag(tag: string) {
-    const postListData: typeof postListSchema._type =
-      await this.httpClient.request({
-        url: `${this.baseUrl}/posts?tag=${tag}`,
+    const postListData = await this.httpClient.request<
+      typeof postListSchema._type
+    >({
+      input: `/posts?tag=${tag}`,
+      init: {
         method: "GET",
-      });
+      },
+    });
     return postListData;
   }
 
   public async getCategoryBySlug(slug: string) {
-    const categoryData: typeof categorySchema._type =
-      await this.httpClient.request({
-        url: `${this.baseUrl}/categories/slug:${slug}`,
+    const categoryData = await this.httpClient.request<
+      typeof categorySchema._type
+    >({
+      input: `/categories/slug:${slug}`,
+      init: {
         method: "GET",
-      });
+      },
+    });
     return categoryData;
   }
 }
