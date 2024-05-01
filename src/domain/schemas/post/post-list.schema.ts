@@ -82,8 +82,4 @@ export const postListSchema = z.object({
       other_URLs: z.object({}),
     })
   ),
-  meta: z.object({
-    links: z.object({ counts: z.string() }),
-    wpcom: z.boolean(),
-  }),
 });
