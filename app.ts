@@ -10,12 +10,12 @@ import fastifyCors from "@fastify/cors";
 import fastifyView from "@fastify/view";
 import packageJSON from "./package.json";
 import fastifySwagger from "@fastify/swagger";
-import { routes } from "./src/infra/http/routes";
 import { fastifyExpress } from "@fastify/express";
 import fastifySwaggerUI from "@fastify/swagger-ui";
-import { viewRouter } from "./src/infra/http/view-router";
+import { routes } from "./src/presentation/_routes";
+import { viewRouter } from "./src/presentation/view.router";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { errorHandler } from "./src/infra/http/error-handler";
+import { errorHandler } from "./src/infrastructure/errors/error-handler";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
