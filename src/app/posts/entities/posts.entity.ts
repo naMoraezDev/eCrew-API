@@ -1,5 +1,5 @@
 import { PostFactory } from "../../../infra/utils/posts-factory";
-import { WordpressService } from "../../../infra/wordpress/service";
+import { WordpressService } from "../../../infra/wordpress/wordpress.service";
 
 export class PostsEntity {
   private slug: string;

@@ -1,11 +1,12 @@
 import { fetchApi } from "../utils/fetch-api";
 import { tagSchema } from "../schemas/tag.schema";
 import { postSchema } from "../schemas/post.schema";
+import { WordpressContract } from "./wordpress.contract";
 import { tagListSchema } from "../schemas/tag-list.shema";
 import { categorySchema } from "../schemas/category.schema";
 import { postListSchema } from "../schemas/post-list.schema";
 
-export class WordpressService {
+export class WordpressService implements WordpressContract {
   public async getPostsByCategory(categorySlug: string) {
     const postListData = await fetchApi<typeof postListSchema._type>(
       `/posts?category=${categorySlug}`

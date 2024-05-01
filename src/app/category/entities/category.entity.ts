@@ -1,4 +1,4 @@
-import { WordpressService } from "../../../infra/wordpress/service";
+import { WordpressService } from "../../../infra/wordpress/wordpress.service";
 
 export class CategoryEntity {
   private slug: string;

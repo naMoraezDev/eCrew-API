@@ -9,11 +9,13 @@ import {
 import fastifyCors from "@fastify/cors";
 import fastifyView from "@fastify/view";
 import packageJSON from "./package.json";
-import routes from "./src/infra/http/routes";
 import fastifySwagger from "@fastify/swagger";
+import { routes } from "./src/infra/http/routes";
 import { fastifyExpress } from "@fastify/express";
 import fastifySwaggerUI from "@fastify/swagger-ui";
+import { viewRouter } from "./src/infra/http/view-router";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
+import { errorHandler } from "./src/infra/http/error-handler";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -32,13 +34,7 @@ app.register(fastifyCors, {
   origin: "*",
 });
 
-app.get("/", async (request, reply) => {
-  return reply.view(path.join("public", "views", "index.pug"), {
-    title: "ePosts API",
-    version: packageJSON.version,
-    docs: `${request.protocol}://${request.hostname}/docs`,
-  });
-});
+app.register(viewRouter);
 
 app.register(fastifySwagger, {
   swagger: {
@@ -54,7 +50,7 @@ app.register(fastifySwagger, {
 });
 
 app.register(fastifySwaggerUI, {
-  routePrefix: "/docs",
+  routePrefix: "/swagger",
 });
 
 app.setValidatorCompiler(validatorCompiler);
@@ -62,5 +58,7 @@ app.setSerializerCompiler(serializerCompiler);
 
 app.register(fastifyExpress);
 app.register(routes, { prefix: "/api" });
+
+app.setErrorHandler(errorHandler);
 
 export default app;
