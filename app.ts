@@ -51,6 +51,16 @@ app.register(fastifySwagger, {
 
 app.register(fastifySwaggerUI, {
   routePrefix: "/swagger",
+  theme: {
+    title: "ePosts API",
+    css: [
+      {
+        filename: "theme.css",
+        content:
+          'body { padding-bottom: 80px } .topbar { position: sticky } .topbar { top: 0 } .topbar { z-index: 1 } .topbar { width: 100% } .link img { display: none } .link:after { content: "ePosts" }',
+      },
+    ],
+  },
 });
 
 app.setValidatorCompiler(validatorCompiler);
