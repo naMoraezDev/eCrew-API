@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 
-export async function healthCheck(app: FastifyInstance) {
+export async function healthRouter(app: FastifyInstance) {
   app.get(
     "/health",
     {

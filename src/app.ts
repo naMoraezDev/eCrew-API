@@ -8,19 +8,19 @@ import {
 } from "fastify-type-provider-zod";
 import fastifyCors from "@fastify/cors";
 import fastifyView from "@fastify/view";
-import packageJSON from "./package.json";
+import packageJSON from "../package.json";
 import fastifySwagger from "@fastify/swagger";
+import { routes } from "./presentation/routes";
 import { fastifyExpress } from "@fastify/express";
 import fastifySwaggerUI from "@fastify/swagger-ui";
-import { routes } from "./src/presentation/_routes";
-import { viewRouter } from "./src/presentation/view.router";
+import { viewRouter } from "./presentation/view.router";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { errorHandler } from "./src/infrastructure/errors/error-handler";
+import { errorHandler } from "./infrastructure/errors/error-handler";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(require("@fastify/static"), {
-  root: path.join(__dirname, "public"),
+  root: path.join(__dirname, "../public"),
   prefix: "/public/",
 });
 

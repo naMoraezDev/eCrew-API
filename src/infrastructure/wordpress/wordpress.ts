@@ -21,11 +21,14 @@ export class Wordpress implements WordpressProtocol {
     this.httpClient = httpClient;
   }
 
+  private readonly baseUrl: string =
+    process.env.PRIVATE_WORDPRESS_API_URL ?? "";
+
   public async getPostsByCategory(categorySlug: string) {
     const postListData = await this.httpClient.request<
       typeof postListSchema._type
     >({
-      input: `/posts?category=${categorySlug}`,
+      input: `${this.baseUrl}/posts?category=${categorySlug}`,
       init: {
         method: "GET",
       },
@@ -37,7 +40,7 @@ export class Wordpress implements WordpressProtocol {
     const tagListData = await this.httpClient.request<
       typeof tagListSchema._type
     >({
-      input: "/tags",
+      input: `${this.baseUrl}/tags`,
       init: {
         method: "GET",
       },
@@ -47,7 +50,7 @@ export class Wordpress implements WordpressProtocol {
 
   public async getTagBySlug(slug: string) {
     const tagData = await this.httpClient.request<typeof tagSchema._type>({
-      input: `/tags/slug:${slug}`,
+      input: `${this.baseUrl}/tags/slug:${slug}`,
       init: {
         method: "GET",
       },
@@ -57,7 +60,7 @@ export class Wordpress implements WordpressProtocol {
 
   public async getPostBySlug(slug: string) {
     const postData = await this.httpClient.request<typeof postSchema._type>({
-      input: `/posts/slug:${slug}`,
+      input: `${this.baseUrl}/posts/slug:${slug}`,
       init: {
         method: "GET",
       },
@@ -69,7 +72,7 @@ export class Wordpress implements WordpressProtocol {
     const postListData = await this.httpClient.request<
       typeof postListSchema._type
     >({
-      input: `/posts?tag=${tag}`,
+      input: `${this.baseUrl}/posts?tag=${tag}`,
       init: {
         method: "GET",
       },
@@ -81,7 +84,7 @@ export class Wordpress implements WordpressProtocol {
     const categoryData = await this.httpClient.request<
       typeof categorySchema._type
     >({
-      input: `/categories/slug:${slug}`,
+      input: `${this.baseUrl}/categories/slug:${slug}`,
       init: {
         method: "GET",
       },

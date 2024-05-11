@@ -1,10 +1,10 @@
 import z from "zod";
 import { FastifyInstance } from "fastify";
-import { TagService } from "../domain/services/tag.service";
-import { tagSchema } from "../domain/schemas/tag/tag.schema";
-import { tagListSchema } from "../domain/schemas/tag/tag-list.shema";
-import { TagController } from "../application/controllers/tag.controller";
-import { TagRepository } from "../infrastructure/repositories/tag.repository";
+import { TagService } from "../../domain/services/tag.service";
+import { tagSchema } from "../../domain/schemas/tag/tag.schema";
+import { tagListSchema } from "../../domain/schemas/tag/tag-list.shema";
+import { TagController } from "../../application/controllers/tag.controller";
+import { TagRepository } from "../../infrastructure/repositories/tag.repository";
 
 export async function tagRouter(app: FastifyInstance) {
   app.get(
