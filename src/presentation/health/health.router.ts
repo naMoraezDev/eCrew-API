@@ -6,7 +6,7 @@ export async function healthRouter(app: FastifyInstance) {
     {
       schema: {
         tags: ["health check"],
-        summary: "Verifica a saúde e o desempenho da aplicação.",
+        summary: "Checks application health and performance.",
       },
     },
     async (_, reply) => {
