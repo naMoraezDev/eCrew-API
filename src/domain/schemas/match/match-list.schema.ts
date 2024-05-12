@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const runningMatchListSchema = z.array(
+export const matchListSchema = z.array(
   z.object({
     original_scheduled_at: z.string(),
     videogame_title: z.object({

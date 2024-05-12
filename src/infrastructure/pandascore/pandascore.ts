@@ -1,15 +1,14 @@
 import { HttpClient } from "../adapters/factories/http-client.factory";
+import { matchListSchema } from "../../domain/schemas/match/match-list.schema";
 import { matchListQuerySchema } from "../../domain/schemas/match/match-list-query.schema";
-import { runningMatchListSchema } from "../../domain/schemas/match/running-match-list.schema";
-import { upcomingMatchListSchema } from "../../domain/schemas/match/upcoming-match-list.schema";
 
 interface PandascoreProtocol {
   getUpcomingMatchList: (
     query: typeof matchListQuerySchema._type
-  ) => Promise<typeof upcomingMatchListSchema._type>;
+  ) => Promise<typeof matchListSchema._type>;
   getRunningMatchList: (
     query: typeof matchListQuerySchema._type
-  ) => Promise<typeof runningMatchListSchema._type>;
+  ) => Promise<typeof matchListSchema._type>;
 }
 
 export class Pandascore implements PandascoreProtocol {
@@ -25,7 +24,7 @@ export class Pandascore implements PandascoreProtocol {
 
   public async getUpcomingMatchList(query: typeof matchListQuerySchema._type) {
     const matchListData = await this.httpClient.request<
-      typeof upcomingMatchListSchema._type
+      typeof matchListSchema._type
     >({
       input: `${this.baseUrl}/matches/upcoming${
         query?.page || query?.filter || query?.per_page || query?.filter_type
@@ -52,7 +51,7 @@ export class Pandascore implements PandascoreProtocol {
 
   public async getRunningMatchList(query: typeof matchListQuerySchema._type) {
     const matchListData = await this.httpClient.request<
-      typeof runningMatchListSchema._type
+      typeof matchListSchema._type
     >({
       input: `${this.baseUrl}/matches/running${
         query?.page || query?.filter || query?.per_page || query?.filter_type

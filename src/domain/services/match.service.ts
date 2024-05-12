@@ -1,15 +1,14 @@
 import { matchListQuerySchema } from "../schemas/match/match-list-query.schema";
-import { runningMatchListSchema } from "../schemas/match/running-match-list.schema";
 import { MatchRepository } from "../../infrastructure/repositories/match.repository";
-import { upcomingMatchListSchema } from "../schemas/match/upcoming-match-list.schema";
+import { formattedMatchListSchema } from "../schemas/match/formatted-match-list.schema";
 
 export interface MatchServiceProtocol {
   getUpcomingMatchList(
     query: typeof matchListQuerySchema._type
-  ): Promise<typeof upcomingMatchListSchema._type>;
+  ): Promise<typeof formattedMatchListSchema._type>;
   getRunningMatchList(
     query: typeof matchListQuerySchema._type
-  ): Promise<typeof runningMatchListSchema._type>;
+  ): Promise<typeof formattedMatchListSchema._type>;
 }
 
 export class MatchService implements MatchServiceProtocol {
