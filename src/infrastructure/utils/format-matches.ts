@@ -26,6 +26,12 @@ export function formatMatches(matchListData: typeof matchListSchema._type) {
           embed_url: stream.embed_url || null,
         };
       }),
+      results: match.results.map((result) => {
+        return {
+          score: result.score || 0,
+          team_id: result.team_id || null,
+        };
+      }),
       opponents: match.opponents.map((opponent) => {
         return {
           opponent: {

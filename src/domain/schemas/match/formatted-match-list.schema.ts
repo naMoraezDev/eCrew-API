@@ -25,6 +25,12 @@ export const formattedMatchListSchema = z.array(
         embed_url: z.string().nullable(),
       })
     ),
+    results: z.array(
+      z.object({
+        score: z.number().nullable(),
+        team_id: z.number().nullable(),
+      })
+    ),
     opponents: z.array(
       z.object({
         opponent: z.object({
