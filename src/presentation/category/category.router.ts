@@ -10,7 +10,7 @@ export async function categoryRouter(app: FastifyInstance) {
     "/category/:slug",
     {
       schema: {
-        tags: ["category"],
+        tags: ["categories"],
         summary: "Get information about a single category (by slug).",
         params: z.object({
           slug: z.string(),

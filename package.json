@@ -4,8 +4,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx --watch --env-file=.env.development src/server.ts",
-    "build": "tsup bin/www.ts --format esm",
-    "start": "node --env-file=.env.production dist/www.mjs"
+    "build": "tsup src/server.ts --out-dir dist",
+    "start": "node --env-file=.env.production dist/server.js"
   },
   "author": "Gabriel Moraes",
   "devDependencies": {

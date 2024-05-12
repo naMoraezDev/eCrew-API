@@ -11,7 +11,7 @@ export async function postRouter(app: FastifyInstance) {
     "/posts/:categorySlug",
     {
       schema: {
-        tags: ["post"],
+        tags: ["posts"],
         summary: "Get a list of matching posts (by category slug).",
         params: z.object({
           categorySlug: z.string(),
@@ -32,7 +32,7 @@ export async function postRouter(app: FastifyInstance) {
     "/posts/tag/:slug",
     {
       schema: {
-        tags: ["post"],
+        tags: ["posts"],
         summary: "Get a list of matching posts (by tag slug).",
         params: z.object({
           slug: z.string(),
@@ -53,7 +53,7 @@ export async function postRouter(app: FastifyInstance) {
     "/posts/post/:slug",
     {
       schema: {
-        tags: ["post"],
+        tags: ["posts"],
         summary: "Get a single post (by slug).",
         params: z.object({
           slug: z.string(),

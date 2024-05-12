@@ -11,9 +11,11 @@ export async function tagRouter(app: FastifyInstance) {
     "/tags",
     {
       schema: {
-        tags: ["tag"],
+        tags: ["tags"],
         summary: "Get a list of tags.",
-        
+        response: {
+          200: tagListSchema,
+        },
       },
     },
     async (request, reply) => {
@@ -28,7 +30,7 @@ export async function tagRouter(app: FastifyInstance) {
     "/tags/:slug",
     {
       schema: {
-        tags: ["tag"],
+        tags: ["tags"],
         summary: "Get information about a single tag (by slug).",
         params: z.object({
           slug: z.string(),

@@ -1,8 +1,15 @@
 import { HttpClient } from "../adapters/factories/http-client.factory";
-import { matchListchema } from "../../domain/schemas/match/match-list.schema";
+import { matchListQuerySchema } from "../../domain/schemas/match/match-list-query.schema";
+import { runningMatchListSchema } from "../../domain/schemas/match/running-match-list.schema";
+import { upcomingMatchListShema } from "../../domain/schemas/match/upcoming-match-list.schema";
 
 interface PandascoreProtocol {
-  getMatchList: () => Promise<any>;
+  getUpcomingMatchList: (
+    query: typeof matchListQuerySchema._type
+  ) => Promise<typeof upcomingMatchListShema._type>;
+  getRunningMatchList: (
+    query: typeof matchListQuerySchema._type
+  ) => Promise<typeof runningMatchListSchema._type>;
 }
 
 export class Pandascore implements PandascoreProtocol {
@@ -16,11 +23,50 @@ export class Pandascore implements PandascoreProtocol {
   private readonly apiKey: string =
     process.env.PRIVATE_PANDASCORE_API_KEY ?? "";
 
-  public async getMatchList() {
+  public async getUpcomingMatchList(query: typeof matchListQuerySchema._type) {
     const matchListData = await this.httpClient.request<
-      typeof matchListchema._type
+      typeof upcomingMatchListShema._type
     >({
-      input: `${this.baseUrl}/matches`,
+      input: `${this.baseUrl}/matches/upcoming${
+        query?.page || query?.filter || query?.per_page || query?.filter_type
+          ? "?"
+          : ""
+      }${
+        query?.filter
+          ? `&filter${query?.filter_type ? `[${query?.filter_type}]` : ""}=${
+              query?.filter
+            }`
+          : ""
+      }${query?.per_page ? `&per_page=${query?.per_page}` : ""}${
+        query?.page ? `&page=${query?.page}` : ""
+      }`,
+      init: {
+        method: "GET",
+        headers: {
+          Authorization: this.apiKey,
+        },
+      },
+    });
+    return matchListData;
+  }
+
+  public async getRunningMatchList(query: typeof matchListQuerySchema._type) {
+    const matchListData = await this.httpClient.request<
+      typeof runningMatchListSchema._type
+    >({
+      input: `${this.baseUrl}/matches/running${
+        query?.page || query?.filter || query?.per_page || query?.filter_type
+          ? "?"
+          : ""
+      }${
+        query?.filter
+          ? `&filter${query?.filter_type ? `[${query?.filter_type}]` : ""}=${
+              query?.filter
+            }`
+          : ""
+      }${query?.per_page ? `&per_page=${query?.per_page}` : ""}${
+        query?.page ? `&page=${query?.page}` : ""
+      }`,
       init: {
         method: "GET",
         headers: {
