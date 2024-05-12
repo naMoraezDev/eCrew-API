@@ -491,6 +491,28 @@ Abaixo estão os endpoints disponíveis:
   ]
   ```
 
+  ## 9. **GET /api/games**
+
+- Retorna uma lista dos jogos cobertos pelo site.
+- Exemplo de resposta:
+
+  ```json
+  [
+    {
+      "id": 0,
+      "name": "string",
+      "slug": "string",
+      "icon_url": "string"
+    },
+    {
+      "id": 1,
+      "name": "string",
+      "slug": "string",
+      "icon_url": "string"
+    }
+  ]
+  ```
+
 ## Considerações Finais
 
 A api será consumida por uma aplicação web que está em desenvolvimento.
