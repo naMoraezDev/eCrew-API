@@ -19,12 +19,11 @@
 ![Zod](https://img.shields.io/badge/Zod-3E67B1.svg?style=for-the-badge&logo=Zod&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Pug](https://img.shields.io/badge/Pug-FFF?style=for-the-badge&logo=pug&logoColor=A86454)
-![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 
 # API ePosts
 
-A ePosts API é uma api de leitura de postagens, categorias e tags relacionadas a e-sports. A api consome os dados da api pública do worpress, conectada a um projeto de mesmo nome da plataforma. Para vizualizar a documentação completa, acesse [https://eposts-api.vercel.app/docs](https://eposts-api.vercel.app/docs).
+A ePosts API é uma api de leitura de postagens, categorias, tags e partidas relacionadas a e-sports. A api consome os dados da api pública do worpress, conectada a um projeto de mesmo nome da plataforma, e da api pandascore para consulta de dados de partidas agendadas e ao vivo. Para vizualizar a documentação completa, acesse [https://eposts-api.vercel.app/swagger](https://eposts-api.vercel.app/swagger).
 
 Abaixo estão os endpoints disponíveis:
 
@@ -368,6 +367,7 @@ Abaixo estão os endpoints disponíveis:
 - Parâmetros de rota:
   - `slug`: Slug da categoria.
 - Exemplo de resposta:
+
   ```json
   {
     "ID": 0,
@@ -385,6 +385,376 @@ Abaixo estão os endpoints disponíveis:
       }
     }
   }
+  ```
+
+  ## 7. **GET /api/matches/upcoming**
+
+- Retorna uma lista de partidas agendadas.
+- Parâmetros de busca:
+  - `page`: Página atual da lista.
+  - `per_page`: Quantidade de itens por página.
+  - `filter`: Termos de filtro.
+  - `filter_type`: Tipo do filtro a ser aplicado.
+- Exemplo de resposta:
+
+  ```json
+  [
+    {
+      "original_scheduled_at": "string",
+      "videogame_title": "null",
+      "videogame": {
+        "id": 0,
+        "name": "string",
+        "slug": "string"
+      },
+      "league": {
+        "id": 0,
+        "image_url": "string",
+        "modified_at": "string",
+        "name": "string",
+        "slug": "string",
+        "url": "null"
+      },
+      "status": "string",
+      "modified_at": "string",
+      "tournament": {
+        "begin_at": "string",
+        "detailed_stats": true,
+        "end_at": "string",
+        "has_bracket": true,
+        "id": 0,
+        "league_id": 0,
+        "live_supported": true,
+        "modified_at": "string",
+        "name": "string",
+        "prizepool": "null",
+        "serie_id": 0,
+        "slug": "string",
+        "tier": "string",
+        "winner_id": "null",
+        "winner_type": "string"
+      },
+      "scheduled_at": "string",
+      "live": {
+        "opens_at": "null",
+        "supported": true,
+        "url": "null"
+      },
+      "match_type": "string",
+      "id": 0,
+      "name": "string",
+      "winner_id": "null",
+      "detailed_stats": true,
+      "winner_type": "string",
+      "begin_at": "string",
+      "game_advantage": "null",
+      "end_at": "null",
+      "draw": true,
+      "rescheduled": true,
+      "forfeit": true,
+      "serie": {
+        "begin_at": "string",
+        "end_at": "string",
+        "full_name": "string",
+        "id": 0,
+        "league_id": 0,
+        "modified_at": "string",
+        "name": "string",
+        "season": "null",
+        "slug": "string",
+        "winner_id": "null",
+        "winner_type": "string",
+        "year": 0
+      },
+      "streams_list": [
+        {
+          "embed_url": "string",
+          "language": "string",
+          "main": true,
+          "official": true,
+          "raw_url": "string"
+        },
+        {
+          "embed_url": "null",
+          "language": "string",
+          "main": true,
+          "official": true,
+          "raw_url": "string"
+        }
+      ],
+      "results": [
+        {
+          "score": 0,
+          "team_id": 0
+        }
+      ],
+      "number_of_games": 0,
+      "games": [
+        {
+          "begin_at": "string",
+          "complete": true,
+          "detailed_stats": true,
+          "end_at": "string",
+          "finished": true,
+          "forfeit": true,
+          "id": 0,
+          "length": 0,
+          "match_id": 0,
+          "position": 0,
+          "status": "string",
+          "winner": {
+            "id": 0,
+            "type": "string"
+          },
+          "winner_type": "string"
+        },
+        {
+          "begin_at": "string",
+          "complete": true,
+          "detailed_stats": true,
+          "end_at": "null",
+          "finished": true,
+          "forfeit": true,
+          "id": 0,
+          "length": "null",
+          "match_id": 0,
+          "position": 0,
+          "status": "string",
+          "winner": {
+            "id": "null",
+            "type": "string"
+          },
+          "winner_type": "string"
+        },
+        {
+          "begin_at": "null",
+          "complete": true,
+          "detailed_stats": true,
+          "end_at": "null",
+          "finished": true,
+          "forfeit": true,
+          "id": 0,
+          "length": "null",
+          "match_id": 0,
+          "position": 0,
+          "status": "string",
+          "winner": {
+            "id": "null",
+            "type": "string"
+          },
+          "winner_type": "string"
+        }
+      ],
+      "tournament_id": 0,
+      "winner": "null",
+      "slug": "string",
+      "videogame_version": {
+        "current": true,
+        "name": "string"
+      },
+      "opponents": [
+        {
+          "opponent": {
+            "acronym": "string",
+            "id": 0,
+            "image_url": "string",
+            "location": "string",
+            "modified_at": "string",
+            "name": "string",
+            "slug": "string"
+          },
+          "type": "string"
+        }
+      ],
+      "serie_id": 0,
+      "league_id": 0
+    }
+  ]
+  ```
+
+  ## 8. **GET /api/matches/running**
+
+- Retorna uma lista de partidas ao vivo.
+- Parâmetros de busca:
+  - `page`: Página atual da lista.
+  - `per_page`: Quantidade de itens por página.
+  - `filter`: Termos de filtro.
+  - `filter_type`: Tipo do filtro a ser aplicado.
+- Exemplo de resposta:
+
+  ```json
+  [
+    {
+      "original_scheduled_at": "string",
+      "videogame_title": "null",
+      "videogame": {
+        "id": 0,
+        "name": "string",
+        "slug": "string"
+      },
+      "league": {
+        "id": 0,
+        "image_url": "string",
+        "modified_at": "string",
+        "name": "string",
+        "slug": "string",
+        "url": "null"
+      },
+      "status": "string",
+      "modified_at": "string",
+      "tournament": {
+        "begin_at": "string",
+        "detailed_stats": true,
+        "end_at": "string",
+        "has_bracket": true,
+        "id": 0,
+        "league_id": 0,
+        "live_supported": true,
+        "modified_at": "string",
+        "name": "string",
+        "prizepool": "null",
+        "serie_id": 0,
+        "slug": "string",
+        "tier": "string",
+        "winner_id": "null",
+        "winner_type": "string"
+      },
+      "scheduled_at": "string",
+      "live": {
+        "opens_at": "null",
+        "supported": true,
+        "url": "null"
+      },
+      "match_type": "string",
+      "id": 0,
+      "name": "string",
+      "winner_id": "null",
+      "detailed_stats": true,
+      "winner_type": "string",
+      "begin_at": "string",
+      "game_advantage": "null",
+      "end_at": "null",
+      "draw": true,
+      "rescheduled": true,
+      "forfeit": true,
+      "serie": {
+        "begin_at": "string",
+        "end_at": "string",
+        "full_name": "string",
+        "id": 0,
+        "league_id": 0,
+        "modified_at": "string",
+        "name": "string",
+        "season": "null",
+        "slug": "string",
+        "winner_id": "null",
+        "winner_type": "string",
+        "year": 0
+      },
+      "streams_list": [
+        {
+          "embed_url": "string",
+          "language": "string",
+          "main": true,
+          "official": true,
+          "raw_url": "string"
+        },
+        {
+          "embed_url": "null",
+          "language": "string",
+          "main": true,
+          "official": true,
+          "raw_url": "string"
+        }
+      ],
+      "results": [
+        {
+          "score": 0,
+          "team_id": 0
+        }
+      ],
+      "number_of_games": 0,
+      "games": [
+        {
+          "begin_at": "string",
+          "complete": true,
+          "detailed_stats": true,
+          "end_at": "string",
+          "finished": true,
+          "forfeit": true,
+          "id": 0,
+          "length": 0,
+          "match_id": 0,
+          "position": 0,
+          "status": "string",
+          "winner": {
+            "id": 0,
+            "type": "string"
+          },
+          "winner_type": "string"
+        },
+        {
+          "begin_at": "string",
+          "complete": true,
+          "detailed_stats": true,
+          "end_at": "null",
+          "finished": true,
+          "forfeit": true,
+          "id": 0,
+          "length": "null",
+          "match_id": 0,
+          "position": 0,
+          "status": "string",
+          "winner": {
+            "id": "null",
+            "type": "string"
+          },
+          "winner_type": "string"
+        },
+        {
+          "begin_at": "null",
+          "complete": true,
+          "detailed_stats": true,
+          "end_at": "null",
+          "finished": true,
+          "forfeit": true,
+          "id": 0,
+          "length": "null",
+          "match_id": 0,
+          "position": 0,
+          "status": "string",
+          "winner": {
+            "id": "null",
+            "type": "string"
+          },
+          "winner_type": "string"
+        }
+      ],
+      "tournament_id": 0,
+      "winner": "null",
+      "slug": "string",
+      "videogame_version": {
+        "current": true,
+        "name": "string"
+      },
+      "opponents": [
+        {
+          "opponent": {
+            "acronym": "string",
+            "id": 0,
+            "image_url": "string",
+            "location": "string",
+            "modified_at": "string",
+            "name": "string",
+            "slug": "string"
+          },
+          "type": "string"
+        }
+      ],
+      "serie_id": 0,
+      "league_id": 0
+    }
+  ]
   ```
 
 ## Considerações Finais
