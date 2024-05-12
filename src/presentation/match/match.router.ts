@@ -12,7 +12,7 @@ export async function matchRouter(app: FastifyInstance) {
     {
       schema: {
         tags: ["matches"],
-        summary: "Get a list off upcoming matches.",
+        summary: "Get a list of upcoming matches.",
         querystring: matchListQuerySchema,
         response: {
           200: upcomingMatchListSchema,
@@ -31,7 +31,7 @@ export async function matchRouter(app: FastifyInstance) {
     {
       schema: {
         tags: ["matches"],
-        summary: "Get a list off running matches.",
+        summary: "Get a list of running matches.",
         querystring: matchListQuerySchema,
         response: {
           200: runningMatchListSchema,
