@@ -502,17 +502,19 @@ Abaixo estão os endpoints disponíveis:
       "id": 0,
       "name": "string",
       "slug": "string",
-      "icon_url": "string"
+      "icon_url": "string",
+      "logo_url": "string"
     },
     {
       "id": 1,
       "name": "string",
       "slug": "string",
-      "icon_url": "string"
+      "icon_url": "string",
+      "logo_url": "string"
     }
   ]
   ```
 
 ## Considerações Finais
 
-A api será consumida por uma aplicação web que está em desenvolvimento.
+A api será consumida pela aplicação web [https://eposts.vercel.app](https://eposts.vercel.app), ainda em desenvolvimento.
