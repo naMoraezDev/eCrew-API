@@ -48,7 +48,16 @@ export const postListSchema = z.object({
       is_following: z.boolean(),
       global_ID: z.string(),
       featured_image: z.string(),
-      post_thumbnail: z.null(),
+      post_thumbnail: z
+        .object({
+          ID: z.number(),
+          URL: z.string(),
+          guid: z.string(),
+          mime_type: z.string(),
+          width: z.number(),
+          height: z.number(),
+        })
+        .nullable(),
       format: z.string(),
       geo: z.boolean(),
       menu_order: z.number(),
