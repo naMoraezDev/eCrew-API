@@ -37,4 +37,12 @@ export class PostController {
     const posts = new PostsFormatFactory().formatPostListData(postListData);
     return reply.status(200).send(posts);
   }
+
+  public async getPostsBySearch(request: FastifyRequest, reply: FastifyReply) {
+    const params = request.params as { search: string };
+    const { search } = params;
+    const postListData = await this.postService.getPostsBySearch(search);
+    const posts = new PostsFormatFactory().formatPostListData(postListData);
+    return reply.status(200).send(posts);
+  }
 }

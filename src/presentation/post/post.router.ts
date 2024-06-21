@@ -69,4 +69,25 @@ export async function postRouter(app: FastifyInstance) {
       ).getPostBySlug(request, reply);
     }
   );
+
+  app.get(
+    "/posts/search/:search",
+    {
+      schema: {
+        tags: ["posts"],
+        summary: "Get a list of matching posts (by search term).",
+        params: z.object({
+          search: z.string(),
+        }),
+        response: {
+          200: postListSchema,
+        },
+      },
+    },
+    async (request, reply) => {
+      await new PostController(
+        new PostService(new PostRepository())
+      ).getPostsBySearch(request, reply);
+    }
+  );
 }

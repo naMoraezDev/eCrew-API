@@ -9,6 +9,7 @@ export interface PostRepositoryProtocol {
   ): Promise<typeof postListSchema._type>;
   getPostBySlug(slug: string): Promise<typeof postSchema._type>;
   getPostsByTag(tag: string): Promise<typeof postListSchema._type>;
+  getPostsBySearch(search: string): Promise<typeof postListSchema._type>;
 }
 
 export class PostRepository implements PostRepositoryProtocol {
@@ -28,5 +29,9 @@ export class PostRepository implements PostRepositoryProtocol {
     tag: string
   ): Promise<typeof postListSchema._type> {
     return await new Wordpress(httpClientFactory()).getPostsByTag(tag);
+  }
+
+  public async getPostsBySearch(search: string) {
+    return await new Wordpress(httpClientFactory()).getPostsBySearch(search);
   }
 }

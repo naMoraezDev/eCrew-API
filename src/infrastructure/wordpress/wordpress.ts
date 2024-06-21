@@ -14,6 +14,7 @@ interface WordpressProtocol {
   getPostBySlug: (slug: string) => Promise<typeof postSchema._type>;
   getPostsByTag: (tag: string) => Promise<typeof postListSchema._type>;
   getCategoryBySlug: (slug: string) => Promise<typeof categorySchema._type>;
+  getPostsBySearch: (search: string) => Promise<typeof postListSchema._type>;
 }
 
 export class Wordpress implements WordpressProtocol {
@@ -90,5 +91,17 @@ export class Wordpress implements WordpressProtocol {
       },
     });
     return categoryData;
+  }
+
+  public async getPostsBySearch(search: string) {
+    const postListData = await this.httpClient.request<
+      typeof postListSchema._type
+    >({
+      input: `${this.baseUrl}/posts?search=${search}`,
+      init: {
+        method: "GET",
+      },
+    });
+    return postListData;
   }
 }

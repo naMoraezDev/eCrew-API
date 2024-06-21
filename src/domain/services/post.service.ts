@@ -8,6 +8,7 @@ export interface PostServiceProtocol {
   ): Promise<typeof postListSchema._type>;
   getPostBySlug(slug: string): Promise<typeof postSchema._type>;
   getPostsByTag(tag: string): Promise<typeof postListSchema._type>;
+  getPostsBySearch(search: string): Promise<typeof postListSchema._type>;
 }
 
 export class PostService implements PostServiceProtocol {
@@ -23,5 +24,9 @@ export class PostService implements PostServiceProtocol {
 
   public async getPostsByCategory(categorySlug: string) {
     return await this.postRepository.getPostsByCategory(categorySlug);
+  }
+
+  public async getPostsBySearch(search: string) {
+    return await this.postRepository.getPostsBySearch(search);
   }
 }
