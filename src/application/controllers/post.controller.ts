@@ -31,8 +31,13 @@ export class PostController {
   ) {
     const params = request.params as { categorySlug: string };
     const { categorySlug } = params;
+    const query = request.query as {
+      page?: string;
+      number?: string;
+    };
     const postListData = await this.postService.getPostsByCategory(
-      categorySlug
+      categorySlug,
+      query
     );
     const posts = new PostsFormatFactory().formatPostListData(postListData);
     return reply.status(200).send(posts);

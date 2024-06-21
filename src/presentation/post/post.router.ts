@@ -13,6 +13,10 @@ export async function postRouter(app: FastifyInstance) {
       schema: {
         tags: ["posts"],
         summary: "Get a list of matching posts (by category slug).",
+        querystring: z.object({
+          page: z.string().optional(),
+          number: z.string().optional(),
+        }),
         params: z.object({
           categorySlug: z.string(),
         }),

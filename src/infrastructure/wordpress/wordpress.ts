@@ -7,7 +7,11 @@ import { categorySchema } from "../../domain/schemas/category/category.schema";
 
 interface WordpressProtocol {
   getPostsByCategory: (
-    categorySlug: string
+    categorySlug: string,
+    query: {
+      page?: string;
+      number?: string;
+    }
   ) => Promise<typeof postListSchema._type>;
   getTags: () => Promise<typeof tagListSchema._type>;
   getTagBySlug: (slug: string) => Promise<typeof tagSchema._type>;
@@ -25,11 +29,21 @@ export class Wordpress implements WordpressProtocol {
   private readonly baseUrl: string =
     process.env.PRIVATE_WORDPRESS_API_URL ?? "";
 
-  public async getPostsByCategory(categorySlug: string) {
+  public async getPostsByCategory(
+    categorySlug: string,
+    query: {
+      page?: string;
+      number?: string;
+    }
+  ) {
     const postListData = await this.httpClient.request<
       typeof postListSchema._type
     >({
-      input: `${this.baseUrl}/posts?category=${categorySlug}`,
+      input: `${this.baseUrl}/posts?category=${categorySlug}${
+        query?.page || query?.number ? "?" : ""
+      }${query?.page ? `&page=${query?.page}` : ""}${
+        query?.number ? `&number=${query?.number}` : ""
+      }`,
       init: {
         method: "GET",
       },

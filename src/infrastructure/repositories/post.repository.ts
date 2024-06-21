@@ -5,7 +5,11 @@ import { httpClientFactory } from "../adapters/factories/http-client.factory";
 
 export interface PostRepositoryProtocol {
   getPostsByCategory(
-    categorySlug: string
+    categorySlug: string,
+    query: {
+      page?: string;
+      number?: string;
+    }
   ): Promise<typeof postListSchema._type>;
   getPostBySlug(slug: string): Promise<typeof postSchema._type>;
   getPostsByTag(tag: string): Promise<typeof postListSchema._type>;
@@ -14,10 +18,15 @@ export interface PostRepositoryProtocol {
 
 export class PostRepository implements PostRepositoryProtocol {
   public async getPostsByCategory(
-    categorySlug: string
+    categorySlug: string,
+    query: {
+      page?: string;
+      number?: string;
+    }
   ): Promise<typeof postListSchema._type> {
     return await new Wordpress(httpClientFactory()).getPostsByCategory(
-      categorySlug
+      categorySlug,
+      query
     );
   }
 

@@ -4,7 +4,11 @@ import { PostRepository } from "../../infrastructure/repositories/post.repositor
 
 export interface PostServiceProtocol {
   getPostsByCategory(
-    categorySlug: string
+    categorySlug: string,
+    query: {
+      page?: string;
+      number?: string;
+    }
   ): Promise<typeof postListSchema._type>;
   getPostBySlug(slug: string): Promise<typeof postSchema._type>;
   getPostsByTag(tag: string): Promise<typeof postListSchema._type>;
@@ -22,8 +26,14 @@ export class PostService implements PostServiceProtocol {
     return await this.postRepository.getPostsByTag(tag);
   }
 
-  public async getPostsByCategory(categorySlug: string) {
-    return await this.postRepository.getPostsByCategory(categorySlug);
+  public async getPostsByCategory(
+    categorySlug: string,
+    query: {
+      page?: string;
+      number?: string;
+    }
+  ) {
+    return await this.postRepository.getPostsByCategory(categorySlug, query);
   }
 
   public async getPostsBySearch(search: string) {
