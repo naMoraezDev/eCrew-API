@@ -39,11 +39,11 @@ export class Wordpress implements WordpressProtocol {
     const postListData = await this.httpClient.request<
       typeof postListSchema._type
     >({
-      input: `${this.baseUrl}/posts?category=${categorySlug}${
-        query?.page || query?.number ? "?" : ""
-      }${query?.page ? `&page=${query?.page}` : ""}${
-        query?.number ? `&number=${query?.number}` : ""
-      }`,
+      input: `${this.baseUrl}/posts?${
+        categorySlug !== "all" ? `category=${categorySlug}` : ""
+      }${query?.page || query?.number ? "?" : ""}${
+        query?.page ? `&page=${query?.page}` : ""
+      }${query?.number ? `&number=${query?.number}` : ""}`,
       init: {
         method: "GET",
       },
