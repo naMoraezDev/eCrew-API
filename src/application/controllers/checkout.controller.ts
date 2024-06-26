@@ -9,7 +9,7 @@ export class CheckoutController {
     const headers = request.headers as { authorization: string };
     const { authorization } = headers;
     if (!authorization) {
-      reply.status(401).send();
+      reply.status(401).send("Unauthorized!");
       return;
     }
     const decodedIdToken = await firebaseAdmin
@@ -17,7 +17,7 @@ export class CheckoutController {
       .verifyIdToken(authorization)
       .catch(() => null);
     if (!decodedIdToken) {
-      reply.status(401).send();
+      reply.status(401).send("Unauthorized!");
       return;
     }
     const email = decodedIdToken.email || "";
