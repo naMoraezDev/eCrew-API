@@ -7,7 +7,7 @@ import { CheckoutRepository } from "../../infrastructure/repositories/checkout.r
 
 export async function checkoutRouter(app: FastifyInstance) {
   app.post(
-    "/checkout",
+    "/subscription/checkout",
     {
       schema: {
         tags: ["checkout"],

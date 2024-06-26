@@ -6,6 +6,7 @@ import { matchRouter } from "./match/match.router";
 import { healthRouter } from "./health/health.router";
 import { categoryRouter } from "./category/category.router";
 import { checkoutRouter } from "./checkout/checkout.router";
+import { userPreferencesRouter } from "./user-preferences/user-preferences.router";
 
 export async function routes(app: FastifyInstance) {
   app.register(healthRouter);
@@ -14,5 +15,6 @@ export async function routes(app: FastifyInstance) {
   app.register(tagRouter);
   app.register(matchRouter);
   app.register(gameRouter);
+  app.register(userPreferencesRouter);
   app.register(checkoutRouter);
 }
