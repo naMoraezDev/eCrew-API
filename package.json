@@ -24,7 +24,9 @@
     "@fastify/view": "^9.0.0",
     "fastify": "^4.26.2",
     "fastify-type-provider-zod": "^1.1.9",
+    "firebase-admin": "^12.2.0",
     "pug": "^3.0.2",
+    "stripe": "^16.0.0",
     "zod": "^3.23.3"
   }
 }
