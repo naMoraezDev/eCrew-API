@@ -45,6 +45,7 @@ export async function userPreferencesRouter(app: FastifyInstance) {
           stripe_customer_id: z.string().nullable().optional(),
         }),
         response: {
+          409: z.string(),
           201: userPreferencesSchema,
         },
       },
