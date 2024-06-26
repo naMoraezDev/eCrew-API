@@ -14,20 +14,14 @@ export class UserPreferencesController {
   ) {
     const headers = request.headers as { authorization: string };
     const { authorization } = headers;
-    if (!authorization) {
-      reply.status(401).send("Unauthorized!");
-      return;
-    }
     const decodedIdToken = await firebaseAdmin
       .auth()
       .verifyIdToken(authorization)
       .catch(() => null);
-    if (!decodedIdToken) {
-      reply.status(401).send("Unauthorized!");
-      return;
-    }
     const userPreferences =
-      await this.userPreferencesService.getUserPreferences(decodedIdToken.uid);
+      await this.userPreferencesService.getUserPreferences(
+        decodedIdToken?.uid || ""
+      );
     if (!userPreferences) {
       return reply.status(404).send("User preferences not found!");
     }
@@ -40,23 +34,15 @@ export class UserPreferencesController {
   ) {
     const headers = request.headers as { authorization: string };
     const { authorization } = headers;
-    if (!authorization) {
-      reply.status(401).send("Unauthorized!");
-      return;
-    }
     const decodedIdToken = await firebaseAdmin
       .auth()
       .verifyIdToken(authorization)
       .catch(() => null);
-    if (!decodedIdToken) {
-      reply.status(401).send("Unauthorized!");
-      return;
-    }
     const body = request.body as UserPreferencesServiceProtocol.Preferences;
     const userPreferences =
       await this.userPreferencesService.createUserPreferences({
         preferences: body,
-        uid: decodedIdToken.uid,
+        uid: decodedIdToken?.uid || "",
       });
     if (!userPreferences) {
       return reply
@@ -72,22 +58,14 @@ export class UserPreferencesController {
   ) {
     const headers = request.headers as { authorization: string };
     const { authorization } = headers;
-    if (!authorization) {
-      reply.status(401).send("Unauthorized!");
-      return;
-    }
     const decodedIdToken = await firebaseAdmin
       .auth()
       .verifyIdToken(authorization)
       .catch(() => null);
-    if (!decodedIdToken) {
-      reply.status(401).send("Unauthorized!");
-      return;
-    }
     const body = request.body as UserPreferencesServiceProtocol.Preferences;
     await this.userPreferencesService.updateUserPreferences({
       preferences: body,
-      uid: decodedIdToken.uid,
+      uid: decodedIdToken?.uid || "",
     });
     return reply.status(204).send("User preferences updated!");
   }

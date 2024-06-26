@@ -1,6 +1,7 @@
 import { ZodError } from "zod";
 import { FastifyInstance } from "fastify";
 import { NotFoundError } from "./error-instances/not-found";
+import { UnauthorizedError } from "./error-instances/unauthorized";
 
 type FastifyErrorHandler = FastifyInstance["errorHandler"];
 
@@ -15,6 +16,9 @@ export const errorHandler: FastifyErrorHandler = (error, _, reply) => {
     return reply.status(404).send({
       message: error.message,
     });
+  }
+  if (error instanceof UnauthorizedError) {
+    return reply.status(401).send({ message: "Unauthorized." });
   }
   return reply.status(500).send("Internal Server Error.");
 };

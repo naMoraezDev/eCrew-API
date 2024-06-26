@@ -3,9 +3,12 @@ import { FastifyInstance } from "fastify";
 import { UserPreferencesService } from "../../domain/services/user-preferences.service";
 import { userPreferencesSchema } from "../../domain/schemas/user-preferences/user-preferences.schema";
 import { UserPreferencesController } from "../../application/controllers/user-preferences.controller";
+import { authorizationMiddleware } from "../../application/middlewares/authorization-middleware.router";
 import { UserPreferencesRepository } from "../../infrastructure/repositories/user-preferences.repository";
 
 export async function userPreferencesRouter(app: FastifyInstance) {
+  app.addHook("onRequest", authorizationMiddleware);
+
   app.get(
     "/user/preferences",
     {
@@ -37,7 +40,7 @@ export async function userPreferencesRouter(app: FastifyInstance) {
           authorization: z.string(),
         }),
         response: {
-          200: userPreferencesSchema,
+          201: userPreferencesSchema,
         },
       },
     },
@@ -58,7 +61,7 @@ export async function userPreferencesRouter(app: FastifyInstance) {
           authorization: z.string(),
         }),
         response: {
-          200: userPreferencesSchema,
+          204: z.string(),
         },
       },
     },
