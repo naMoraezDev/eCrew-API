@@ -20,8 +20,9 @@ export class CheckoutController {
       reply.status(401).send("Unauthorized!");
       return;
     }
+    const uid = decodedIdToken.uid || "";
     const email = decodedIdToken.email || "";
-    const sessionId = await this.checkoutService.checkout(email);
+    const sessionId = await this.checkoutService.checkout(uid, email);
     return reply.status(200).send(sessionId);
   }
 }

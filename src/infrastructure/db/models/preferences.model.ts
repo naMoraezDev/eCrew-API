@@ -6,8 +6,12 @@ const preferencesSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    subscription: {
+    stripe_customer_id: {
       type: String,
+      required: false,
+    },
+    subscription: {
+      type: Boolean,
       required: false,
     },
     newsletter: {

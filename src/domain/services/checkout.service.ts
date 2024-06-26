@@ -2,13 +2,13 @@ import { CheckoutRepository } from "../../infrastructure/repositories/checkout.r
 import { checkoutSchema } from "../schemas/checkout/checkout.schema";
 
 export interface CheckoutServiceProtocol {
-  checkout(email: string): Promise<typeof checkoutSchema._type>;
+  checkout(uid: string, email: string): Promise<typeof checkoutSchema._type>;
 }
 
 export class CheckoutService implements CheckoutServiceProtocol {
   constructor(readonly checkoutRepository: CheckoutRepository) {}
 
-  public async checkout(email: string) {
-    return await this.checkoutRepository.checkout(email);
+  public async checkout(uid: string, email: string) {
+    return await this.checkoutRepository.checkout(uid, email);
   }
 }
