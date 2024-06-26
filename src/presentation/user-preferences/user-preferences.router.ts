@@ -39,6 +39,11 @@ export async function userPreferencesRouter(app: FastifyInstance) {
         headers: z.object({
           authorization: z.string(),
         }),
+        body: z.object({
+          newsletter: z.boolean().nullable().optional(),
+          subscription: z.boolean().nullable().optional(),
+          stripe_customer_id: z.string().nullable().optional(),
+        }),
         response: {
           201: userPreferencesSchema,
         },
@@ -59,6 +64,11 @@ export async function userPreferencesRouter(app: FastifyInstance) {
         summary: "Updates the user preferences.",
         headers: z.object({
           authorization: z.string(),
+        }),
+        body: z.object({
+          newsletter: z.boolean().nullable().optional(),
+          subscription: z.boolean().nullable().optional(),
+          stripe_customer_id: z.string().nullable().optional(),
         }),
         response: {
           204: z.string(),
