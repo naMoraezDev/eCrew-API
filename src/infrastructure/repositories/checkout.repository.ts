@@ -38,7 +38,7 @@ export class CheckoutRepository implements CheckoutRepositoryProtocol {
           quantity: 1,
           price_data: {
             currency: "brl",
-            unit_amount: 1000,
+            unit_amount: 1390,
             recurring: {
               interval: "month",
             },
