@@ -20,9 +20,9 @@ export class NewsletterRepository implements NewsletterServiceProtocol {
     });
     const emailConfig = {
       to: email,
-      from: "ePosts",
-      subject: "Newsletter ePosts - Obrigado por se inscrever!",
-      html: "<p>Obrigado por se inscrever no nosso newsletter!</p>",
+      from: "ePosts <newsletter@eposts.com>",
+      subject: "Newsletter ePosts",
+      html: "<p>Obrigado por se inscrever na nosso newsletter!</p>",
     };
     await smtp.sendMail(emailConfig).catch((err) => console.log(err));
     return newSubscription;
