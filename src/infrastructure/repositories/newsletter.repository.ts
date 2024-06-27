@@ -1,3 +1,4 @@
+import { smtp } from "../nodemailer/nodemailer";
 import { ConflictError } from "../errors/error-instances/conflict";
 import { NewsletterServiceProtocol } from "../../domain/services/newsletter.service";
 import { newsletterSubscriptionModel } from "../db/models/newsletter-subscription.model";
@@ -17,6 +18,13 @@ export class NewsletterRepository implements NewsletterServiceProtocol {
       email,
       subscribed: true,
     });
+    const emailConfig = {
+      to: email,
+      from: "@ePosts - Newsletter",
+      subject: "Newsletter ePosts - Obrigado por se inscrever!",
+      html: "<p>Obrigado por se inscrever no nosso newsletter!</p>",
+    };
+    await smtp.sendMail(emailConfig).catch((err) => console.log(err));
     return newSubscription;
   }
 }
