@@ -15,6 +15,6 @@ export class CheckoutController {
     const uid = decodedIdToken?.uid || "";
     const email = decodedIdToken?.email || "";
     const sessionId = await this.checkoutService.checkout(uid, email);
-    return reply.status(200).send(sessionId);
+    return reply.status(201).send(sessionId);
   }
 }

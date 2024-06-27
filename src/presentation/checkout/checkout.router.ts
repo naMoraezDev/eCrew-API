@@ -19,7 +19,7 @@ export async function checkoutRouter(app: FastifyInstance) {
           authorization: z.string(),
         }),
         response: {
-          200: checkoutSchema,
+          201: checkoutSchema,
         },
       },
     },
