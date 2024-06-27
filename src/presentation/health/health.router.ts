@@ -1,4 +1,5 @@
 import { FastifyInstance } from "fastify";
+import { healthSchema } from "../../domain/schemas/health/health.schema";
 
 export async function healthRouter(app: FastifyInstance) {
   app.get(
@@ -7,6 +8,9 @@ export async function healthRouter(app: FastifyInstance) {
       schema: {
         tags: ["health check"],
         summary: "Checks application health and performance.",
+        response: {
+          200: healthSchema,
+        },
       },
     },
     async (_, reply) => {

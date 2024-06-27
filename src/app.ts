@@ -14,6 +14,7 @@ import { routes } from "./presentation/routes";
 import { fastifyExpress } from "@fastify/express";
 import fastifySwaggerUI from "@fastify/swagger-ui";
 import { DBConnect } from "./infrastructure/db/conn";
+import { models } from "./infrastructure/utils/models";
 import { viewRouter } from "./presentation/view.router";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { errorHandler } from "./infrastructure/errors/error-handler";
@@ -73,5 +74,7 @@ app.register(fastifyExpress);
 app.register(routes, { prefix: "/api" });
 
 app.setErrorHandler(errorHandler);
+
+app.register(models);
 
 export default app;
