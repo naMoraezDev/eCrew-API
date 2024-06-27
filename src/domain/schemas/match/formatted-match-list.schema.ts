@@ -35,8 +35,8 @@ export const formattedMatchListSchema = z.array(
       z.object({
         opponent: z.object({
           id: z.number().nullable(),
-          name: z.string().nullable(),
           slug: z.string().nullable(),
+          name: z.string().nullable(),
           acronym: z.string().nullable(),
           location: z.string().nullable(),
           image_url: z.string().nullable(),
