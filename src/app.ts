@@ -73,8 +73,8 @@ app.setSerializerCompiler(serializerCompiler);
 app.register(fastifyExpress);
 app.register(routes, { prefix: "/api" });
 
-app.setErrorHandler(errorHandler);
+//app.setErrorHandler(errorHandler);
 
-app.register(models);
+//app.register(models);
 
 export default app;
