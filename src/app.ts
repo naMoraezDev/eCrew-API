@@ -24,7 +24,7 @@ DBConnect();
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyCors, {
-  origin: "https://labnews.vercel.app",
+  origin: ["https://labnews.vercel.app", "http://localhost:3000"],
 });
 
 app.register(require("@fastify/static"), {
