@@ -23,6 +23,10 @@ DBConnect();
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
+app.register(fastifyCors, {
+  origin: "https://labnews.vercel.app",
+});
+
 app.register(require("@fastify/static"), {
   root: path.join(__dirname, "../public"),
   prefix: "/public/",
@@ -32,10 +36,6 @@ app.register(fastifyView, {
   engine: {
     pug,
   },
-});
-
-app.register(fastifyCors, {
-  origin: "*",
 });
 
 app.register(viewRouter);
