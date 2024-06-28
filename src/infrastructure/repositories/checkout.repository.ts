@@ -52,6 +52,6 @@ export class CheckoutRepository implements CheckoutRepositoryProtocol {
       cancel_url: process.env.PRIVATE_STRIPE_CANCEL_URL,
       success_url: process.env.PRIVATE_STRIPE_SUCCESS_URL,
     });
-    return { sessionId: checkoutSession.id };
+    return { sessionUrl: checkoutSession.url };
   }
 }

@@ -1,5 +1,5 @@
-import { CheckoutRepository } from "../../infrastructure/repositories/checkout.repository";
 import { checkoutSchema } from "../schemas/checkout/checkout.schema";
+import { CheckoutRepository } from "../../infrastructure/repositories/checkout.repository";
 
 export interface CheckoutServiceProtocol {
   checkout(uid: string, email: string): Promise<typeof checkoutSchema._type>;

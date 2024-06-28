@@ -14,7 +14,7 @@ export class CheckoutController {
       .catch(() => null);
     const uid = decodedIdToken?.uid || "";
     const email = decodedIdToken?.email || "";
-    const sessionId = await this.checkoutService.checkout(uid, email);
-    return reply.status(201).send(sessionId);
+    const sessionUrl = await this.checkoutService.checkout(uid, email);
+    return reply.status(201).send(sessionUrl);
   }
 }
