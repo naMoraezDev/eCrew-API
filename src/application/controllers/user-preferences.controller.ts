@@ -3,7 +3,7 @@ import {
   UserPreferencesService,
   UserPreferencesServiceProtocol,
 } from "../../domain/services/user-preferences.service";
-import { firebaseAdmin } from "../../infrastructure/firebase/firebase-admin";
+import { firebaseAdmin } from "../../infrastructure/db/firebase/firebase-admin";
 
 export class UserPreferencesController {
   constructor(readonly userPreferencesService: UserPreferencesService) {}

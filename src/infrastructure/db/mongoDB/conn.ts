@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export async function DBConnect() {
+export async function mongoDBConnect() {
   try {
     mongoose.set("strictQuery", true);
     await mongoose.connect(

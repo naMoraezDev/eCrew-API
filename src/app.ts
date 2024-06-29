@@ -13,13 +13,13 @@ import fastifySwagger from "@fastify/swagger";
 import { routes } from "./presentation/routes";
 import { fastifyExpress } from "@fastify/express";
 import fastifySwaggerUI from "@fastify/swagger-ui";
-import { DBConnect } from "./infrastructure/db/conn";
 import { models } from "./infrastructure/utils/models";
 import { viewRouter } from "./presentation/view.router";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
+import { mongoDBConnect } from "./infrastructure/db/mongoDB/conn";
 import { errorHandler } from "./infrastructure/errors/error-handler";
 
-DBConnect();
+mongoDBConnect();
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 

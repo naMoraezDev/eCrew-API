@@ -1,4 +1,4 @@
-import { preferencesModel } from "../db/models/preferences.model";
+import { preferencesModel } from "../db/mongoDB/models/preferences.model";
 import { UserPreferencesServiceProtocol } from "../../domain/services/user-preferences.service";
 import { userPreferencesSchema } from "../../domain/schemas/user-preferences/user-preferences.schema";
 

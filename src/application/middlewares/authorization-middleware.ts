@@ -1,4 +1,4 @@
-import { firebaseAdmin } from "../../infrastructure/firebase/firebase-admin";
+import { firebaseAdmin } from "../../infrastructure/db/firebase/firebase-admin";
 
 export interface AuthorizationMiddlewareProtocol {
   authorize: (params: AuthorizationMiddlewareProtocol.Params) => Promise<void>;

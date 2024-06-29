@@ -1,5 +1,5 @@
 import { stripe } from "../stripe/stripe";
-import { preferencesModel } from "../db/models/preferences.model";
+import { preferencesModel } from "../db/mongoDB/models/preferences.model";
 import { checkoutSchema } from "../../domain/schemas/checkout/checkout.schema";
 
 export interface CheckoutRepositoryProtocol {

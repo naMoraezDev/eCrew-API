@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { CheckoutService } from "../../domain/services/checkout.service";
-import { firebaseAdmin } from "../../infrastructure/firebase/firebase-admin";
+import { firebaseAdmin } from "../../infrastructure/db/firebase/firebase-admin";
 
 export class CheckoutController {
   constructor(readonly checkoutService: CheckoutService) {}

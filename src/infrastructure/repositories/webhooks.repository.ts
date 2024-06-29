@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import { stripe } from "../stripe/stripe";
-import { preferencesModel } from "../db/models/preferences.model";
 import { BadRequestError } from "../errors/error-instances/bad-request";
+import { preferencesModel } from "../db/mongoDB/models/preferences.model";
 
 export interface WebhooksRepositoryProtocol {
   listen(secret: string, buffer: Buffer): Promise<{ received: boolean }>;

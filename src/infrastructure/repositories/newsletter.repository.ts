@@ -1,7 +1,7 @@
 import { smtp } from "../nodemailer/nodemailer";
 import { ConflictError } from "../errors/error-instances/conflict";
 import { NewsletterServiceProtocol } from "../../domain/services/newsletter.service";
-import { newsletterSubscriptionModel } from "../db/models/newsletter-subscription.model";
+import { newsletterSubscriptionModel } from "../db/mongoDB/models/newsletter-subscription.model";
 import { newsletterSubscriptionSchema } from "../../domain/schemas/newsletter/newsletter.schema";
 
 export class NewsletterRepository implements NewsletterServiceProtocol {

@@ -1,6 +1,6 @@
 import { FastifyRequest } from "fastify";
 import { AuthorizationMiddleware } from "./authorization-middleware";
-import { firebaseAdmin } from "../../infrastructure/firebase/firebase-admin";
+import { firebaseAdmin } from "../../infrastructure/db/firebase/firebase-admin";
 import { UnauthorizedError } from "../../infrastructure/errors/error-instances/unauthorized";
 
 export async function authorizationMiddleware(request: FastifyRequest) {
