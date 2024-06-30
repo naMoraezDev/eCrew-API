@@ -24,7 +24,11 @@ mongoDBConnect();
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyCors, {
-  origin: ["https://labnews.vercel.app", "http://localhost:3000"],
+  origin: [
+    "http://localhost:3000",
+    "https://eposts.pages.dev",
+    "https://labnews.vercel.app",
+  ],
 });
 
 app.register(require("@fastify/static"), {
