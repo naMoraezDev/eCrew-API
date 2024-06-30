@@ -27,7 +27,7 @@ app.register(fastifyCors, {
   origin: [
     "http://localhost:3000",
     "https://eposts.pages.dev",
-    "https://labnews.vercel.app",
+    "https://eposts.vercel.app",
   ],
 });
 
