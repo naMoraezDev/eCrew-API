@@ -18,8 +18,10 @@ import { viewRouter } from "./presentation/view.router";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { mongoDBConnect } from "./infrastructure/db/mongoDB/conn";
 import { errorHandler } from "./infrastructure/errors/error-handler";
+import { redisConnect } from "./infrastructure/db/redis/redis";
 
 mongoDBConnect();
+redisConnect();
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 

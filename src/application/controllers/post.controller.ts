@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { PostService } from "../../domain/services/post.service";
+import { saveDataToCache } from "../../infrastructure/utils/cache";
 import { PostsFormatFactory } from "../../infrastructure/utils/posts-format-factory";
 import { NotFoundError } from "../../infrastructure/errors/error-instances/not-found";
 
@@ -14,6 +15,7 @@ export class PostController {
       throw new NotFoundError("Post not found.");
     }
     const post = new PostsFormatFactory().formatPostData(postData);
+    await saveDataToCache(request, post);
     return reply.status(200).send(post);
   }
 
@@ -22,6 +24,7 @@ export class PostController {
     const { slug } = params;
     const postListData = await this.postService.getPostsByTag(slug);
     const posts = new PostsFormatFactory().formatPostListData(postListData);
+    await saveDataToCache(request, posts);
     return reply.status(200).send(posts);
   }
 
@@ -40,6 +43,7 @@ export class PostController {
       query
     );
     const posts = new PostsFormatFactory().formatPostListData(postListData);
+    await saveDataToCache(request, posts);
     return reply.status(200).send(posts);
   }
 
@@ -48,6 +52,7 @@ export class PostController {
     const { search } = params;
     const postListData = await this.postService.getPostsBySearch(search);
     const posts = new PostsFormatFactory().formatPostListData(postListData);
+    await saveDataToCache(request, posts);
     return reply.status(200).send(posts);
   }
 }

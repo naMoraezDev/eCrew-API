@@ -3,10 +3,13 @@ import { FastifyInstance } from "fastify";
 import { PostService } from "../../domain/services/post.service";
 import { postSchema } from "../../domain/schemas/post/post.schema";
 import { postListSchema } from "../../domain/schemas/post/post-list.schema";
+import { cacheMiddleware } from "../../application/middlewares/cache.router";
 import { PostController } from "../../application/controllers/post.controller";
 import { PostRepository } from "../../infrastructure/repositories/post.repository";
 
 export async function postRouter(app: FastifyInstance) {
+  app.addHook("onRequest", cacheMiddleware);
+
   app.get(
     "/posts/:categorySlug",
     {

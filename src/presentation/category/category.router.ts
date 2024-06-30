@@ -1,11 +1,14 @@
 import z from "zod";
 import { FastifyInstance } from "fastify";
 import { CategoryService } from "../../domain/services/category.service";
+import { cacheMiddleware } from "../../application/middlewares/cache.router";
 import { categorySchema } from "../../domain/schemas/category/category.schema";
 import { CategoryController } from "../../application/controllers/category.controller";
 import { CategoryRepository } from "../../infrastructure/repositories/category.repository";
 
 export async function categoryRouter(app: FastifyInstance) {
+  app.addHook("onRequest", cacheMiddleware);
+
   app.get(
     "/category/:slug",
     {

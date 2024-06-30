@@ -4,9 +4,12 @@ import { TagService } from "../../domain/services/tag.service";
 import { tagSchema } from "../../domain/schemas/tag/tag.schema";
 import { tagListSchema } from "../../domain/schemas/tag/tag-list.shema";
 import { TagController } from "../../application/controllers/tag.controller";
+import { cacheMiddleware } from "../../application/middlewares/cache.router";
 import { TagRepository } from "../../infrastructure/repositories/tag.repository";
 
 export async function tagRouter(app: FastifyInstance) {
+  app.addHook("onRequest", cacheMiddleware);
+
   app.get(
     "/tags",
     {
