@@ -5,7 +5,10 @@ export async function cacheMiddleware(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  const key = request.routeOptions.url + JSON.stringify(request.query) || "";
+  const key =
+    request.routeOptions.url +
+      JSON.stringify(request.params) +
+      JSON.stringify(request.query) || "";
   try {
     const cachedData = await client.get(key);
     if (cachedData) {
