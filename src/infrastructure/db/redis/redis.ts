@@ -1,4 +1,4 @@
-import { createClient } from "redis";
+/* import { createClient } from "redis";
 
 export const client = createClient({
   password: "HtgIzRtg8JX8yPl32lxpTqlAoNslFfxM",
@@ -15,4 +15,4 @@ export async function redisConnect() {
   } catch (error) {
     console.log(`Failed to connect to Redis: ${error}`);
   }
-}
+} */

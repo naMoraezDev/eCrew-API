@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+/* import { FastifyReply, FastifyRequest } from "fastify";
 import { client } from "../../infrastructure/db/redis/redis";
 
 export async function cacheMiddleware(
@@ -22,4 +22,4 @@ export async function cacheMiddleware(
     console.log(`Error in cache: ${error}`);
     return;
   }
-}
+} */

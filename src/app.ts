@@ -16,12 +16,12 @@ import fastifySwaggerUI from "@fastify/swagger-ui";
 import { models } from "./infrastructure/utils/models";
 import { viewRouter } from "./presentation/view.router";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
+// import { redisConnect } from "./infrastructure/db/redis/redis";
 import { mongoDBConnect } from "./infrastructure/db/mongoDB/conn";
 import { errorHandler } from "./infrastructure/errors/error-handler";
-import { redisConnect } from "./infrastructure/db/redis/redis";
 
 mongoDBConnect();
-redisConnect();
+// redisConnect();
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
