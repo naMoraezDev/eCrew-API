@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { MatchService } from "../../domain/services/match.service";
-import { saveDataToCache } from "../../infrastructure/utils/cache";
+// import { saveDataToCache } from "../../infrastructure/utils/cache";
 import { matchListQuerySchema } from "../../domain/schemas/match/match-list-query.schema";
 
 export class MatchController {
@@ -12,7 +12,7 @@ export class MatchController {
   ) {
     const query = request.query as typeof matchListQuerySchema._type;
     const matchList = await this.matchService.getUpcomingMatchList(query);
-    await saveDataToCache(request, matchList);
+    // await saveDataToCache(request, matchList);
     return reply.status(200).send(matchList);
   }
 
@@ -22,7 +22,7 @@ export class MatchController {
   ) {
     const query = request.query as typeof matchListQuerySchema._type;
     const matchList = await this.matchService.getRunningMatchList(query);
-    await saveDataToCache(request, matchList);
+    // await saveDataToCache(request, matchList);
     return reply.status(200).send(matchList);
   }
 }
