@@ -10,7 +10,16 @@ interface PandascoreProtocol {
   getRunningMatchList: (
     query: typeof matchListQuerySchema._type
   ) => Promise<typeof matchListSchema._type>;
+  getRunningR6SiegeTournaments: () => Promise<
+    typeof tournamentListSchema._type
+  >;
+  getRunningValorantTournaments: () => Promise<
+    typeof tournamentListSchema._type
+  >;
+  getRunningLoLTournaments: () => Promise<typeof tournamentListSchema._type>;
+  getRunningCsGoTournaments: () => Promise<typeof tournamentListSchema._type>;
   getRunningCodMWTournaments: () => Promise<typeof tournamentListSchema._type>;
+  getRunningDota2Tournaments: () => Promise<typeof tournamentListSchema._type>;
 }
 
 export class Pandascore implements PandascoreProtocol {
@@ -83,6 +92,81 @@ export class Pandascore implements PandascoreProtocol {
       typeof tournamentListSchema._type
     >({
       input: `${this.baseUrl}/codmw/tournaments/running`,
+      init: {
+        method: "GET",
+        headers: {
+          Authorization: this.apiKey,
+        },
+      },
+    });
+    return tournamentList;
+  }
+
+  public async getRunningCsGoTournaments() {
+    const tournamentList = await this.httpClient.request<
+      typeof tournamentListSchema._type
+    >({
+      input: `${this.baseUrl}/csgo/tournaments/running`,
+      init: {
+        method: "GET",
+        headers: {
+          Authorization: this.apiKey,
+        },
+      },
+    });
+    return tournamentList;
+  }
+
+  public async getRunningDota2Tournaments() {
+    const tournamentList = await this.httpClient.request<
+      typeof tournamentListSchema._type
+    >({
+      input: `${this.baseUrl}/dota2/tournaments/running`,
+      init: {
+        method: "GET",
+        headers: {
+          Authorization: this.apiKey,
+        },
+      },
+    });
+    return tournamentList;
+  }
+
+  public async getRunningLoLTournaments() {
+    const tournamentList = await this.httpClient.request<
+      typeof tournamentListSchema._type
+    >({
+      input: `${this.baseUrl}/lol/tournaments/running`,
+      init: {
+        method: "GET",
+        headers: {
+          Authorization: this.apiKey,
+        },
+      },
+    });
+    return tournamentList;
+  }
+
+  public async getRunningR6SiegeTournaments() {
+    const tournamentList = await this.httpClient.request<
+      typeof tournamentListSchema._type
+    >({
+      input: `${this.baseUrl}/r6siege/tournaments/running`,
+      init: {
+        method: "GET",
+        headers: {
+          Authorization: this.apiKey,
+        },
+      },
+    });
+    return tournamentList;
+  }
+
+  public async getRunningValorantTournaments() {
+    const tournamentList = await this.httpClient.request<
+      typeof tournamentListSchema._type
+    >({
+      input: `${this.baseUrl}/valorant/tournaments/running`,
       init: {
         method: "GET",
         headers: {

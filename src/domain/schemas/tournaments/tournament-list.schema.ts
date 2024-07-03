@@ -2,97 +2,115 @@ import { z } from "zod";
 
 export const tournamentListSchema = z.array(
   z.object({
-    begin_at: z.string(),
-    detailed_stats: z.boolean(),
-    end_at: z.string(),
-    has_bracket: z.boolean(),
-    id: z.number(),
-    league: z.object({
-      id: z.number(),
-      image_url: z.string(),
-      modified_at: z.string(),
-      name: z.string(),
-      slug: z.string(),
-      url: z.string(),
-    }),
-    league_id: z.number(),
-    live_supported: z.boolean(),
+    begin_at: z.string().nullable(),
+    detailed_stats: z.boolean().nullable(),
+    end_at: z.string().nullable(),
+    has_bracket: z.boolean().nullable(),
+    id: z.number().nullable(),
+    league: z
+      .object({
+        id: z.number().nullable(),
+        image_url: z.string().nullable(),
+        modified_at: z.string().nullable(),
+        name: z.string().nullable(),
+        slug: z.string().nullable(),
+        url: z.string().nullable(),
+      })
+      .nullable(),
+    league_id: z.number().nullable(),
+    live_supported: z.boolean().nullable(),
     matches: z.array(
       z.object({
-        begin_at: z.string(),
-        detailed_stats: z.boolean(),
-        draw: z.boolean(),
-        end_at: z.null(),
-        forfeit: z.boolean(),
-        game_advantage: z.null(),
-        id: z.number(),
-        live: z.object({
-          opens_at: z.null(),
-          supported: z.boolean(),
-          url: z.null(),
-        }),
-        match_type: z.string(),
-        modified_at: z.string(),
-        name: z.string(),
-        number_of_games: z.number(),
-        original_scheduled_at: z.string(),
-        rescheduled: z.boolean(),
-        scheduled_at: z.string(),
-        slug: z.string(),
-        status: z.string(),
-        streams_list: z.array(
-          z.object({
-            embed_url: z.null(),
-            language: z.string(),
-            main: z.boolean(),
-            official: z.boolean(),
-            raw_url: z.string(),
+        begin_at: z.string().nullable(),
+        detailed_stats: z.boolean().nullable(),
+        draw: z.boolean().nullable(),
+        end_at: z.string().nullable(),
+        forfeit: z.boolean().nullable(),
+        game_advantage: z.any().nullable(),
+        id: z.number().nullable(),
+        live: z
+          .object({
+            opens_at: z.string().nullable(),
+            supported: z.boolean().nullable(),
+            url: z.string().nullable(),
           })
-        ),
-        tournament_id: z.number(),
-        winner_id: z.null(),
-        winner_type: z.string(),
+          .nullable(),
+        match_type: z.string().nullable(),
+        modified_at: z.string().nullable(),
+        name: z.string().nullable(),
+        number_of_games: z.number().nullable(),
+        original_scheduled_at: z.string().nullable(),
+        rescheduled: z.boolean().nullable(),
+        scheduled_at: z.string().nullable(),
+        slug: z.string().nullable(),
+        status: z.string().nullable(),
+        streams_list: z
+          .array(
+            z.object({
+              embed_url: z.string().nullable(),
+              language: z.string().nullable(),
+              main: z.boolean().nullable(),
+              official: z.boolean().nullable(),
+              raw_url: z.string().nullable(),
+            })
+          )
+          .nullable(),
+        tournament_id: z.number().nullable(),
+        winner_id: z.number().nullable(),
+        winner_type: z.string().nullable(),
       })
     ),
-    modified_at: z.string(),
-    name: z.string(),
-    prizepool: z.null(),
-    serie: z.object({
-      begin_at: z.string(),
-      end_at: z.string(),
-      full_name: z.string(),
-      id: z.number(),
-      league_id: z.number(),
-      modified_at: z.string(),
-      name: z.string(),
-      season: z.null(),
-      slug: z.string(),
-      winner_id: z.null(),
-      winner_type: z.string(),
-      year: z.number(),
-    }),
-    serie_id: z.number(),
-    slug: z.string(),
-    teams: z.array(
-      z.object({
-        acronym: z.string(),
-        id: z.number(),
-        image_url: z.string(),
-        location: z.string(),
-        modified_at: z.string(),
-        name: z.string(),
-        slug: z.string(),
+    modified_at: z.string().nullable(),
+    name: z.string().nullable(),
+    prizepool: z.string().nullable(),
+    serie: z
+      .object({
+        begin_at: z.string().nullable(),
+        end_at: z.string().nullable(),
+        full_name: z.string().nullable(),
+        id: z.number().nullable(),
+        league_id: z.number().nullable(),
+        modified_at: z.string().nullable(),
+        name: z.string().nullable(),
+        season: z.string().nullable(),
+        slug: z.string().nullable(),
+        winner_id: z.number().nullable(),
+        winner_type: z.string().nullable(),
+        year: z.number().nullable(),
       })
-    ),
-    tier: z.string(),
-    videogame: z.object({ id: z.number(), name: z.string(), slug: z.string() }),
-    videogame_title: z.object({
-      id: z.number(),
-      name: z.string(),
-      slug: z.string(),
-      videogame_id: z.number(),
-    }),
-    winner_id: z.null(),
-    winner_type: z.string(),
+      .nullable(),
+    serie_id: z.number().nullable(),
+    slug: z.string().nullable(),
+    teams: z
+      .array(
+        z.object({
+          acronym: z.string().nullable(),
+          id: z.number().nullable(),
+          image_url: z.string().nullable(),
+          location: z.string().nullable(),
+          modified_at: z.string().nullable(),
+          name: z.string().nullable(),
+          slug: z.string().nullable(),
+        })
+      )
+      .nullable(),
+    tier: z.string().nullable(),
+    videogame: z
+      .object({
+        id: z.number().nullable(),
+        name: z.string().nullable(),
+        slug: z.string().nullable(),
+      })
+      .nullable(),
+    videogame_title: z
+      .object({
+        id: z.number().nullable(),
+        name: z.string().nullable(),
+        slug: z.string().nullable(),
+        videogame_id: z.number().nullable(),
+      })
+      .nullable(),
+    winner_id: z.number().nullable(),
+    winner_type: z.string().nullable(),
   })
 );
