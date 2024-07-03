@@ -8,6 +8,7 @@ import { categoryRouter } from "./category/category.router";
 import { checkoutRouter } from "./checkout/checkout.router";
 import { webhooksRouter } from "./webhooks/webhooks.router";
 import { newsletterRouter } from "./newsletter/newsletter.router";
+import { tournamentsRouter } from "./tournaments/tournaments.router";
 import { userPreferencesRouter } from "./user-preferences/user-preferences.router";
 
 export async function routes(app: FastifyInstance) {
@@ -15,6 +16,7 @@ export async function routes(app: FastifyInstance) {
   app.register(postRouter);
   app.register(categoryRouter);
   app.register(tagRouter);
+  app.register(tournamentsRouter);
   app.register(matchRouter);
   app.register(gameRouter);
   app.register(userPreferencesRouter);

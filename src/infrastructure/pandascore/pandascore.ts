@@ -1,6 +1,7 @@
 import { HttpClient } from "../adapters/factories/http-client.factory";
 import { matchListSchema } from "../../domain/schemas/match/match-list.schema";
 import { matchListQuerySchema } from "../../domain/schemas/match/match-list-query.schema";
+import { tournamentListSchema } from "../../domain/schemas/tournaments/tournament-list.schema";
 
 interface PandascoreProtocol {
   getUpcomingMatchList: (
@@ -9,6 +10,7 @@ interface PandascoreProtocol {
   getRunningMatchList: (
     query: typeof matchListQuerySchema._type
   ) => Promise<typeof matchListSchema._type>;
+  getRunningCodMWTournaments: () => Promise<typeof tournamentListSchema._type>;
 }
 
 export class Pandascore implements PandascoreProtocol {
@@ -74,5 +76,20 @@ export class Pandascore implements PandascoreProtocol {
       },
     });
     return matchListData;
+  }
+
+  public async getRunningCodMWTournaments() {
+    const tournamentList = await this.httpClient.request<
+      typeof tournamentListSchema._type
+    >({
+      input: `${this.baseUrl}/codmw/tournaments/running`,
+      init: {
+        method: "GET",
+        headers: {
+          Authorization: this.apiKey,
+        },
+      },
+    });
+    return tournamentList;
   }
 }
