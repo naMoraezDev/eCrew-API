@@ -3,7 +3,7 @@ import { normalize } from "path";
 
 const port = Number(normalize(process.env.PORT || "3333"));
 
-app.listen({ port }, (err, address) => {
+app.listen({ host: "0.0.0.0", port }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
