@@ -1,7 +1,8 @@
 import { HttpClient } from "../adapters/factories/http-client.factory";
 import { matchListSchema } from "../../domain/schemas/match/match-list.schema";
+import { tournamentSchema } from "../../domain/schemas/tournament/tournament.schema";
 import { matchListQuerySchema } from "../../domain/schemas/match/match-list-query.schema";
-import { tournamentListSchema } from "../../domain/schemas/tournaments/tournament-list.schema";
+import { tournamentListSchema } from "../../domain/schemas/tournament/tournament-list.schema";
 
 interface PandascoreProtocol {
   getUpcomingMatchList: (
@@ -16,6 +17,7 @@ interface PandascoreProtocol {
   getRunningValorantTournaments: () => Promise<
     typeof tournamentListSchema._type
   >;
+  getTournamentBySlug(slug: string): Promise<typeof tournamentSchema._type>;
   getRunningLoLTournaments: () => Promise<typeof tournamentListSchema._type>;
   getRunningCsGoTournaments: () => Promise<typeof tournamentListSchema._type>;
   getRunningCodMWTournaments: () => Promise<typeof tournamentListSchema._type>;
@@ -175,5 +177,20 @@ export class Pandascore implements PandascoreProtocol {
       },
     });
     return tournamentList;
+  }
+
+  public async getTournamentBySlug(slug: string) {
+    const tournament = await this.httpClient.request<
+      typeof tournamentSchema._type
+    >({
+      input: `${this.baseUrl}/tournaments/${slug}`,
+      init: {
+        method: "GET",
+        headers: {
+          Authorization: this.apiKey,
+        },
+      },
+    });
+    return tournament;
   }
 }

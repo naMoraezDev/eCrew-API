@@ -1,15 +1,15 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { TournamentsService } from "../../domain/services/tournaments.service";
+import { TournamentService } from "../../domain/services/tournament.service";
 
-export class TournamentsController {
-  constructor(readonly tournamentsService: TournamentsService) {}
+export class TournamentController {
+  constructor(readonly tournamentService: TournamentService) {}
 
   public async getRunningCodMWTournaments(
     _request: FastifyRequest,
     reply: FastifyReply
   ) {
     const tournamentList =
-      await this.tournamentsService.getRunningCodMWTournaments();
+      await this.tournamentService.getRunningCodMWTournaments();
     return reply.status(200).send(tournamentList);
   }
 
@@ -18,7 +18,7 @@ export class TournamentsController {
     reply: FastifyReply
   ) {
     const tournamentList =
-      await this.tournamentsService.getRunningLoLTournaments();
+      await this.tournamentService.getRunningLoLTournaments();
     return reply.status(200).send(tournamentList);
   }
 
@@ -27,7 +27,7 @@ export class TournamentsController {
     reply: FastifyReply
   ) {
     const tournamentList =
-      await this.tournamentsService.getRunningCsGoTournaments();
+      await this.tournamentService.getRunningCsGoTournaments();
     return reply.status(200).send(tournamentList);
   }
 
@@ -36,7 +36,7 @@ export class TournamentsController {
     reply: FastifyReply
   ) {
     const tournamentList =
-      await this.tournamentsService.getRunningDota2Tournaments();
+      await this.tournamentService.getRunningDota2Tournaments();
     return reply.status(200).send(tournamentList);
   }
 
@@ -45,7 +45,7 @@ export class TournamentsController {
     reply: FastifyReply
   ) {
     const tournamentList =
-      await this.tournamentsService.getRunningR6SiegeTournaments();
+      await this.tournamentService.getRunningR6SiegeTournaments();
     return reply.status(200).send(tournamentList);
   }
 
@@ -54,7 +54,17 @@ export class TournamentsController {
     reply: FastifyReply
   ) {
     const tournamentList =
-      await this.tournamentsService.getRunningValorantTournaments();
+      await this.tournamentService.getRunningValorantTournaments();
     return reply.status(200).send(tournamentList);
+  }
+
+  public async getTournamentBySlug(
+    request: FastifyRequest,
+    reply: FastifyReply
+  ) {
+    const params = request.params as { slug: string };
+    const { slug } = params;
+    const tournament = await this.tournamentService.getTournamentBySlug(slug);
+    return reply.status(200).send(tournament);
   }
 }

@@ -1,17 +1,10 @@
 import { Pandascore } from "../pandascore/pandascore";
 import { httpClientFactory } from "../adapters/factories/http-client.factory";
-import { tournamentListSchema } from "../../domain/schemas/tournaments/tournament-list.schema";
+import { TournamentServiceProtocol } from "../../domain/services/tournament.service";
+import { tournamentSchema } from "../../domain/schemas/tournament/tournament.schema";
+import { tournamentListSchema } from "../../domain/schemas/tournament/tournament-list.schema";
 
-export interface TournamentsRepositoryProtocol {
-  getRunningLoLTournaments(): Promise<typeof tournamentListSchema._type>;
-  getRunningCsGoTournaments(): Promise<typeof tournamentListSchema._type>;
-  getRunningCodMWTournaments(): Promise<typeof tournamentListSchema._type>;
-  getRunningDota2Tournaments(): Promise<typeof tournamentListSchema._type>;
-  getRunningR6SiegeTournaments(): Promise<typeof tournamentListSchema._type>;
-  getRunningValorantTournaments(): Promise<typeof tournamentListSchema._type>;
-}
-
-export class TournamentsRepository implements TournamentsRepositoryProtocol {
+export class TournamentRepository implements TournamentServiceProtocol {
   public async getRunningCodMWTournaments(): Promise<
     typeof tournamentListSchema._type
   > {
@@ -64,5 +57,14 @@ export class TournamentsRepository implements TournamentsRepositoryProtocol {
       httpClientFactory()
     ).getRunningValorantTournaments();
     return tournaments;
+  }
+
+  public async getTournamentBySlug(
+    slug: string
+  ): Promise<typeof tournamentSchema._type> {
+    const tournament = await new Pandascore(
+      httpClientFactory()
+    ).getTournamentBySlug(slug);
+    return tournament;
   }
 }

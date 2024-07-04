@@ -77,7 +77,7 @@ app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
 app.register(fastifyExpress);
-app.register(routes, { prefix: "/api" });
+app.register(routes, { prefix: "/api/v1" });
 
 app.setErrorHandler(errorHandler);
 
