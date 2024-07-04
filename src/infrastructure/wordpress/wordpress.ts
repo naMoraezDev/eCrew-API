@@ -26,8 +26,7 @@ export class Wordpress implements WordpressProtocol {
     this.httpClient = httpClient;
   }
 
-  private readonly baseUrl: string =
-    process.env.PRIVATE_WORDPRESS_API_URL ?? "";
+  private readonly baseUrl: string = process.env.WORDPRESS_API_URL ?? "";
 
   public async getPostsByCategory(
     categorySlug: string,

@@ -49,8 +49,8 @@ export class CheckoutRepository implements CheckoutRepositoryProtocol {
       billing_address_collection: "required",
       mode: "subscription",
       allow_promotion_codes: true,
-      cancel_url: process.env.PRIVATE_STRIPE_CANCEL_URL,
-      success_url: process.env.PRIVATE_STRIPE_SUCCESS_URL,
+      cancel_url: process.env.STRIPE_CANCEL_URL,
+      success_url: process.env.STRIPE_SUCCESS_URL,
     });
     return { sessionUrl: checkoutSession.url };
   }

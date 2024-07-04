@@ -30,10 +30,10 @@ export class Pandascore implements PandascoreProtocol {
   }
 
   private readonly baseUrl: string =
-    process.env.PRIVATE_PANDASCORE_API_URL ?? "";
+    process.env.PANDASCORE_API_URL ?? "";
 
   private readonly apiKey: string =
-    process.env.PRIVATE_PANDASCORE_API_KEY ?? "";
+    process.env.PANDASCORE_API_KEY ?? "";
 
   public async getUpcomingMatchList(query: typeof matchListQuerySchema._type) {
     const matchListData = await this.httpClient.request<

@@ -21,7 +21,7 @@ export class WebhooksRepository implements WebhooksRepositoryProtocol {
       event = stripe.webhooks.constructEvent(
         buffer,
         secret,
-        process.env.PRIVATE_STRIPE_WEBHOOK_SECRET || ""
+        process.env.STRIPE_WEBHOOK_SECRET || ""
       );
     } catch (error: any) {
       throw new BadRequestError(`Webhook Error: ${error.message}`);
