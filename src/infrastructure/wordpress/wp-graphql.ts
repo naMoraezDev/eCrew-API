@@ -1,4 +1,6 @@
 import { HttpClient } from "../adapters/factories/http-client.factory";
+import { postListSchema } from "../../domain/schemas/wp-graphql/post-list.schema";
+import { categorySchema } from "../../domain/schemas/wp-graphql/category.schema";
 
 export namespace WPGraphQLProtocol {
   export type Params = {
@@ -22,8 +24,8 @@ export interface WPGraphQLProtocol {
     before,
     number,
     categorySlug,
-  }: WPGraphQLProtocol.Params): Promise<any>;
-  getCategoryBySlug(slug: string): Promise<any>;
+  }: WPGraphQLProtocol.Params): Promise<typeof postListSchema._type>;
+  getCategoryBySlug(slug: string): Promise<typeof categorySchema._type>;
   getPostBySlug(slug: string): Promise<any>;
   getPostsBySearchTerm({
     term,
@@ -45,7 +47,7 @@ export class WPGraphQL implements WPGraphQLProtocol {
     before = null,
     number = null,
   }: WPGraphQLProtocol.Params) {
-    const posts = await this.httpClient.request<any>({
+    const posts = await this.httpClient.request<typeof postListSchema._type>({
       input: `${this.baseUrl}`,
       init: {
         method: "POST",
@@ -104,15 +106,16 @@ export class WPGraphQL implements WPGraphQLProtocol {
   }
 
   public async getCategoryBySlug(slug: string) {
-    const posts = await this.httpClient.request<any>({
-      input: `${this.baseUrl}`,
-      init: {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: {
-          query: `{
+    const category = await this.httpClient.request<typeof categorySchema._type>(
+      {
+        input: `${this.baseUrl}`,
+        init: {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            query: `{
             category(id: "${slug}", idType: SLUG) {
               id
               slug
@@ -132,11 +135,12 @@ export class WPGraphQL implements WPGraphQLProtocol {
               }
             }
           }`,
-        } as any,
-      },
-    });
+          } as any,
+        },
+      }
+    );
 
-    return posts;
+    return category;
   }
 
   public async getPostBySlug(slug: string) {

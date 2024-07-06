@@ -1,6 +1,10 @@
 import z from "zod";
 import { FastifyInstance } from "fastify";
+import { postSchema } from "../../domain/schemas/wp-graphql/post.schema";
 import { WPGraphQLService } from "../../domain/services/wp-graphql.service";
+import { tagListSchema } from "../../domain/schemas/wp-graphql/tag-list.schema";
+import { categorySchema } from "../../domain/schemas/wp-graphql/category.schema";
+import { postListSchema } from "../../domain/schemas/wp-graphql/post-list.schema";
 import { WPGraphQLController } from "../../application/controllers/wp-graphql.controller";
 import { WPGraphQLRepository } from "../../infrastructure/repositories/wp-graphql.repository";
 
@@ -19,6 +23,9 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
         params: z.object({
           categorySlug: z.string(),
         }),
+        response: {
+          200: postListSchema,
+        },
       },
     },
     async (request, reply) => {
@@ -29,7 +36,7 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
   );
 
   app.get(
-    "/graphql/categories/:slug",
+    "/graphql/categories/category/:slug",
     {
       schema: {
         tags: ["graphql"],
@@ -37,6 +44,9 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
         params: z.object({
           slug: z.string(),
         }),
+        response: {
+          200: categorySchema,
+        },
       },
     },
     async (request, reply) => {
@@ -55,6 +65,9 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
         params: z.object({
           slug: z.string(),
         }),
+        response: {
+          200: postSchema,
+        },
       },
     },
     async (request, reply) => {
@@ -76,6 +89,9 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
           number: z.string().optional(),
           before: z.string().optional(),
         }),
+        response: {
+          200: postListSchema,
+        },
       },
     },
     async (request, reply) => {
@@ -91,6 +107,9 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
       schema: {
         tags: ["graphql"],
         summary: "Get a list of tags.",
+        response: {
+          200: tagListSchema,
+        },
       },
     },
     async (request, reply) => {
