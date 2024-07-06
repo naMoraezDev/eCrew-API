@@ -15,4 +15,12 @@ export class WPGraphQLRepository implements WPGraphQLProtocol {
       categorySlug,
     });
   }
+
+  public async getCategoryBySlug({
+    slug,
+  }: WPGraphQLProtocol.GetCategoryParams) {
+    return await new WPGraphQL(httpClientFactory()).getCategoryBySlug({
+      slug,
+    });
+  }
 }

@@ -27,4 +27,22 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
       ).getPostsByCategorySlug(request, reply);
     }
   );
+
+  app.get(
+    "/graphql/categories/:slug",
+    {
+      schema: {
+        tags: ["graphql"],
+        summary: "Get information about a single category (by slug).",
+        params: z.object({
+          slug: z.string(),
+        }),
+      },
+    },
+    async (request, reply) => {
+      await new WPGraphQLController(
+        new WPGraphQLService(new WPGraphQLRepository())
+      ).getCategoryBySlug(request, reply);
+    }
+  );
 }

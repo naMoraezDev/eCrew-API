@@ -7,6 +7,10 @@ export namespace WPGraphQLProtocol {
     number?: string | null;
     before?: string | null;
   };
+
+  export type GetCategoryParams = {
+    slug: string;
+  };
 }
 
 export interface WPGraphQLProtocol {
@@ -16,6 +20,9 @@ export interface WPGraphQLProtocol {
     number,
     categorySlug,
   }: WPGraphQLProtocol.Params): Promise<any>;
+  getCategoryBySlug({
+    slug,
+  }: WPGraphQLProtocol.GetCategoryParams): Promise<any>;
 }
 
 export class WPGraphQL implements WPGraphQLProtocol {
@@ -77,6 +84,44 @@ export class WPGraphQL implements WPGraphQLProtocol {
                 hasNextPage
                 startCursor
                 endCursor
+              }
+            }
+          }`,
+        } as any,
+      },
+    });
+
+    return posts;
+  }
+
+  public async getCategoryBySlug({
+    slug,
+  }: WPGraphQLProtocol.GetCategoryParams) {
+    const posts = await this.httpClient.request<any>({
+      input: `${this.baseUrl}`,
+      init: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {
+          query: `{
+            category(id: "${slug}", idType: SLUG) {
+              id
+              slug
+              name
+              description
+              extraFields {
+                isEditorial
+                isHome
+                featuredPosts {
+                  edges {
+                    node {
+                      id
+                      slug
+                    }
+                  }
+                }
               }
             }
           }`,

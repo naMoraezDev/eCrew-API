@@ -4,7 +4,7 @@ import { WPGraphQLRepository } from "../../infrastructure/repositories/wp-graphq
 export class WPGraphQLService implements WPGraphQLProtocol {
   constructor(readonly wpGraphQLRepository: WPGraphQLRepository) {}
 
-  async getPostsByCategorySlug({
+  public async getPostsByCategorySlug({
     after,
     before,
     number,
@@ -15,6 +15,14 @@ export class WPGraphQLService implements WPGraphQLProtocol {
       before,
       number,
       categorySlug,
+    });
+  }
+
+  public async getCategoryBySlug({
+    slug,
+  }: WPGraphQLProtocol.GetCategoryParams) {
+    return await this.wpGraphQLRepository.getCategoryBySlug({
+      slug,
     });
   }
 }

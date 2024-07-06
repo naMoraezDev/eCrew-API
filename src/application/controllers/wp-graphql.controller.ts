@@ -21,4 +21,13 @@ export class WPGraphQLController {
     });
     return reply.status(200).send(posts);
   }
+
+  public async getCategoryBySlug(request: FastifyRequest, reply: FastifyReply) {
+    const params = request.params as { slug: string };
+    const { slug } = params;
+    const category = await this.wpGraphQLService.getCategoryBySlug({
+      slug,
+    });
+    return reply.status(200).send(category);
+  }
 }
