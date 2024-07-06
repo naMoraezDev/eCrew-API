@@ -14,7 +14,7 @@ import { userPreferencesRouter } from "./user-preferences/user-preferences.route
 
 export async function routes(app: FastifyInstance) {
   app.register(healthRouter);
-  app.register(wPGraphQLRouter);
+  app.register(wPGraphQLRouter, { prefix: "/wp-graphql" });
   app.register(postRouter);
   app.register(categoryRouter);
   app.register(tagRouter);

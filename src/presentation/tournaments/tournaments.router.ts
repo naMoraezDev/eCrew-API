@@ -11,7 +11,7 @@ export async function tournamentsRouter(app: FastifyInstance) {
     "/codmw/tournaments/running",
     {
       schema: {
-        tags: ["tournament"],
+        tags: ["tournaments"],
         summary: "Get a list of running Cod MW tournaments.",
         response: {
           200: tournamentListSchema,

@@ -33,7 +33,7 @@ export async function tagRouter(app: FastifyInstance) {
     "/tags/:slug",
     {
       schema: {
-        tags: ["tags"],
+        tags: ["wp-public"],
         summary: "Get information about a single tag (by slug).",
         params: z.object({
           slug: z.string(),

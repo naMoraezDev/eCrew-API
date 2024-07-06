@@ -10,10 +10,10 @@ import { WPGraphQLRepository } from "../../infrastructure/repositories/wp-graphq
 
 export async function wPGraphQLRouter(app: FastifyInstance) {
   app.get(
-    "/graphql/posts/category/:categorySlug",
+    "/posts/category/:categorySlug",
     {
       schema: {
-        tags: ["graphql"],
+        tags: ["wp-graphql"],
         summary: "Get a list of matching posts (by category slug).",
         querystring: z.object({
           after: z.string().optional(),
@@ -36,10 +36,10 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
   );
 
   app.get(
-    "/graphql/categories/category/:slug",
+    "/categories/category/:slug",
     {
       schema: {
-        tags: ["graphql"],
+        tags: ["wp-graphql"],
         summary: "Get information about a single category (by slug).",
         params: z.object({
           slug: z.string(),
@@ -57,10 +57,10 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
   );
 
   app.get(
-    "/graphql/posts/post/:slug",
+    "/posts/post/:slug",
     {
       schema: {
-        tags: ["graphql"],
+        tags: ["wp-graphql"],
         summary: "Get information about a single post (by slug).",
         params: z.object({
           slug: z.string(),
@@ -78,10 +78,10 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
   );
 
   app.get(
-    "/graphql/posts",
+    "/posts",
     {
       schema: {
-        tags: ["graphql"],
+        tags: ["wp-graphql"],
         summary: "Get a list of matching posts (by search term).",
         querystring: z.object({
           term: z.string(),
@@ -102,10 +102,10 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
   );
 
   app.get(
-    "/graphql/tags",
+    "/tags",
     {
       schema: {
-        tags: ["graphql"],
+        tags: ["wp-graphql"],
         summary: "Get a list of tags.",
         response: {
           200: tagListSchema,
