@@ -191,6 +191,15 @@ export class WPGraphQL implements WPGraphQLProtocol {
                   }
                 }
               }
+              tags {
+                edges {
+                  node {
+                    id
+                    slug
+                    name
+                  }
+                }
+              }
               editorBlocks {
                 name
                 renderedHtml
@@ -295,5 +304,56 @@ export class WPGraphQL implements WPGraphQLProtocol {
     });
 
     return tags;
+  }
+
+  public async getSimplifiedPostBySlug(slug: string) {
+    const post = await this.httpClient.request<any>({
+      input: `${this.baseUrl}`,
+      init: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {
+          query: `{
+            post(id: "${slug}", idType: SLUG) {
+              id
+              slug
+              title
+              excerpt
+              featuredImage {
+                node {
+                  sourceUrl
+                  sizes
+                  caption
+                }
+              }
+              date
+              modified
+              categories {
+                edges {
+                  node {
+                    id
+                    slug
+                    name
+                  }
+                }
+              }
+              tags {
+                edges {
+                  node {
+                    id
+                    slug
+                    name
+                  }
+                }
+              }
+            }
+          }`,
+        } as any,
+      },
+    });
+
+    return post;
   }
 }

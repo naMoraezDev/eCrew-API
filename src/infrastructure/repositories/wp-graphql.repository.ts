@@ -17,7 +17,23 @@ export class WPGraphQLRepository implements WPGraphQLProtocol {
   }
 
   public async getCategoryBySlug(slug: string) {
-    return await new WPGraphQL(httpClientFactory()).getCategoryBySlug(slug);
+    const category = await new WPGraphQL(httpClientFactory()).getCategoryBySlug(
+      slug
+    );
+    if (category.data.category.extraFields.featuredPosts) {
+      const featuredPosts = Promise.all(
+        category.data.category.extraFields.featuredPosts.edges.map(
+          async (post: any) => {
+            return await new WPGraphQL(
+              httpClientFactory()
+            ).getSimplifiedPostBySlug(post.node.slug);
+          }
+        )
+      );
+      category.data.category.extraFields.featuredPosts = await featuredPosts;
+      return category;
+    }
+    return category;
   }
 
   public async getPostBySlug(slug: string) {
