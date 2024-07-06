@@ -1,11 +1,33 @@
 import { z } from "zod";
 import { FastifyInstance } from "fastify";
 import { TeamService } from "../../domain/services/team.service";
+import { teamSchema } from "../../domain/schemas/team/team.schema";
 import { teamListSchema } from "../../domain/schemas/team/team-list.schema";
 import { TeamController } from "../../application/controllers/team.controller";
 import { TeamRepository } from "../../infrastructure/repositories/team.repository";
 
 export async function teamsRouter(app: FastifyInstance) {
+  app.get(
+    "/teams/:slug",
+    {
+      schema: {
+        tags: ["teams"],
+        summary: "Get a single team (by slug).",
+        params: z.object({
+          slug: z.string(),
+        }),
+        response: {
+          200: teamSchema,
+        },
+      },
+    },
+    async (request, reply) => {
+      await new TeamController(
+        new TeamService(new TeamRepository())
+      ).getTeamBySlug(request, reply);
+    }
+  );
+
   app.get(
     "/codmw/teams",
     {

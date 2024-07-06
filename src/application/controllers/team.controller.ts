@@ -4,6 +4,13 @@ import { TeamService } from "../../domain/services/team.service";
 export class TeamController {
   constructor(readonly teamService: TeamService) {}
 
+  public async getTeamBySlug(request: FastifyRequest, reply: FastifyReply) {
+    const params = request.params as { slug: string };
+    const { slug } = params;
+    const team = await this.teamService.getTeamBySlug(slug);
+    return reply.status(200).send(team);
+  }
+
   public async getCodMWTeams(request: FastifyRequest, reply: FastifyReply) {
     const query = request.query as { page?: string; per_page?: string };
     const teamList = await this.teamService.getCodTeams(query);

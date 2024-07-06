@@ -1,3 +1,4 @@
+import { teamSchema } from "../schemas/team/team.schema";
 import { teamListSchema } from "../schemas/team/team-list.schema";
 import { TeamRepository } from "../../infrastructure/repositories/team.repository";
 
@@ -9,6 +10,7 @@ export namespace TeamServiceProtocol {
 }
 
 export interface TeamServiceProtocol {
+  getTeamBySlug(slug: string): Promise<typeof teamSchema._type>;
   getR6Teams({
     page,
     per_page,
@@ -62,5 +64,9 @@ export class TeamService implements TeamServiceProtocol {
     per_page,
   }: TeamServiceProtocol.Params) {
     return await this.teamRepository.getValorantTeams({ page, per_page });
+  }
+
+  public async getTeamBySlug(slug: string) {
+    return await this.teamRepository.getTeamBySlug(slug);
   }
 }

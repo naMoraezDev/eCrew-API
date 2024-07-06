@@ -1,3 +1,4 @@
+import { teamSchema } from "../../domain/schemas/team/team.schema";
 import { HttpClient } from "../adapters/factories/http-client.factory";
 import { teamListSchema } from "../../domain/schemas/team/team-list.schema";
 import { matchListSchema } from "../../domain/schemas/match/match-list.schema";
@@ -51,7 +52,7 @@ interface PandascoreProtocol {
     page,
     per_page,
   }: PandascoreProtocol.Params) => Promise<typeof teamListSchema._type>;
-  getTeamBySlug(slug: string): Promise<any>;
+  getTeamBySlug(slug: string): Promise<typeof teamSchema._type>;
 }
 
 export class Pandascore implements PandascoreProtocol {
@@ -343,7 +344,7 @@ export class Pandascore implements PandascoreProtocol {
   }
 
   public async getTeamBySlug(slug: string) {
-    const team = await this.httpClient.request<typeof tournamentSchema._type>({
+    const team = await this.httpClient.request<typeof teamSchema._type>({
       input: `${this.baseUrl}/teams/${slug}`,
       init: {
         method: "GET",

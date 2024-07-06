@@ -47,4 +47,8 @@ export class TeamRepository implements TeamServiceProtocol {
       per_page,
     });
   }
+
+  public async getTeamBySlug(slug: string) {
+    return await new Pandascore(httpClientFactory()).getTeamBySlug(slug);
+  }
 }
