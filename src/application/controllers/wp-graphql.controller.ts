@@ -51,4 +51,9 @@ export class WPGraphQLController {
     });
     return reply.status(200).send(posts);
   }
+
+  public async getTags(_request: FastifyRequest, reply: FastifyReply) {
+    const post = await this.wpGraphQLService.getTags();
+    return reply.status(200).send(post);
+  }
 }

@@ -39,4 +39,8 @@ export class WPGraphQLService implements WPGraphQLProtocol {
       number,
     });
   }
+
+  public async getTags() {
+    return await this.wpGraphQLRepository.getTags();
+  }
 }

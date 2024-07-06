@@ -84,4 +84,19 @@ export async function wPGraphQLRouter(app: FastifyInstance) {
       ).getPostsBySearchTerm(request, reply);
     }
   );
+
+  app.get(
+    "/graphql/tags",
+    {
+      schema: {
+        tags: ["graphql"],
+        summary: "Get a list of tags.",
+      },
+    },
+    async (request, reply) => {
+      await new WPGraphQLController(
+        new WPGraphQLService(new WPGraphQLRepository())
+      ).getTags(request, reply);
+    }
+  );
 }

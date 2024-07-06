@@ -37,4 +37,8 @@ export class WPGraphQLRepository implements WPGraphQLProtocol {
       before,
     });
   }
+
+  public async getTags() {
+    return await new WPGraphQL(httpClientFactory()).getTags();
+  }
 }

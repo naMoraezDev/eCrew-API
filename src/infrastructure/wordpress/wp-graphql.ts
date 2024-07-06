@@ -31,6 +31,7 @@ export interface WPGraphQLProtocol {
     before,
     number,
   }: WPGraphQLProtocol.SearchParams): Promise<any>;
+  getTags(): Promise<any>;
 }
 
 export class WPGraphQL implements WPGraphQLProtocol {
@@ -266,5 +267,33 @@ export class WPGraphQL implements WPGraphQLProtocol {
     });
 
     return posts;
+  }
+
+  public async getTags() {
+    const tags = await this.httpClient.request<any>({
+      input: `${this.baseUrl}`,
+      init: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {
+          query: `{
+            tags {
+              edges {
+                node {
+                  id
+                  slug
+                  name
+                  count
+                }
+              }
+            }
+          }`,
+        } as any,
+      },
+    });
+
+    return tags;
   }
 }
