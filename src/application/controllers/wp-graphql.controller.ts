@@ -25,9 +25,14 @@ export class WPGraphQLController {
   public async getCategoryBySlug(request: FastifyRequest, reply: FastifyReply) {
     const params = request.params as { slug: string };
     const { slug } = params;
-    const category = await this.wpGraphQLService.getCategoryBySlug({
-      slug,
-    });
+    const category = await this.wpGraphQLService.getCategoryBySlug(slug);
     return reply.status(200).send(category);
+  }
+
+  public async getPostBySlug(request: FastifyRequest, reply: FastifyReply) {
+    const params = request.params as { slug: string };
+    const { slug } = params;
+    const post = await this.wpGraphQLService.getPostBySlug(slug);
+    return reply.status(200).send(post);
   }
 }

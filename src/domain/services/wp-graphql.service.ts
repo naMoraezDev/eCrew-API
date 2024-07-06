@@ -18,11 +18,11 @@ export class WPGraphQLService implements WPGraphQLProtocol {
     });
   }
 
-  public async getCategoryBySlug({
-    slug,
-  }: WPGraphQLProtocol.GetCategoryParams) {
-    return await this.wpGraphQLRepository.getCategoryBySlug({
-      slug,
-    });
+  public async getCategoryBySlug(slug: string) {
+    return await this.wpGraphQLRepository.getCategoryBySlug(slug);
+  }
+
+  public async getPostBySlug(slug: string) {
+    return await this.wpGraphQLRepository.getPostBySlug(slug);
   }
 }

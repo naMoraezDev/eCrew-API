@@ -7,10 +7,6 @@ export namespace WPGraphQLProtocol {
     number?: string | null;
     before?: string | null;
   };
-
-  export type GetCategoryParams = {
-    slug: string;
-  };
 }
 
 export interface WPGraphQLProtocol {
@@ -20,9 +16,8 @@ export interface WPGraphQLProtocol {
     number,
     categorySlug,
   }: WPGraphQLProtocol.Params): Promise<any>;
-  getCategoryBySlug({
-    slug,
-  }: WPGraphQLProtocol.GetCategoryParams): Promise<any>;
+  getCategoryBySlug(slug: string): Promise<any>;
+  getPostBySlug(slug: string): Promise<any>;
 }
 
 export class WPGraphQL implements WPGraphQLProtocol {
@@ -94,9 +89,7 @@ export class WPGraphQL implements WPGraphQLProtocol {
     return posts;
   }
 
-  public async getCategoryBySlug({
-    slug,
-  }: WPGraphQLProtocol.GetCategoryParams) {
+  public async getCategoryBySlug(slug: string) {
     const posts = await this.httpClient.request<any>({
       input: `${this.baseUrl}`,
       init: {
@@ -130,5 +123,71 @@ export class WPGraphQL implements WPGraphQLProtocol {
     });
 
     return posts;
+  }
+
+  public async getPostBySlug(slug: string) {
+    const post = await this.httpClient.request<any>({
+      input: `${this.baseUrl}`,
+      init: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {
+          query: `{
+            post(id: "${slug}", idType: SLUG) {
+              id
+              slug
+              title
+              excerpt
+              featuredImage {
+                node {
+                  sourceUrl
+                  sizes
+                  caption
+                }
+              }
+              date
+              modified
+              author {
+                node {
+                  id
+                  slug
+                  name
+                  firstName
+                  lastName
+                  nicename
+                  nicename
+                  description
+                  avatar {
+                    url
+                    height
+                    width
+                    size
+                    foundAvatar
+                  }
+                }
+              }
+              categories {
+                edges {
+                  node {
+                    id
+                    slug
+                    name
+                  }
+                }
+              }
+              editorBlocks {
+                name
+                renderedHtml
+              }
+              content
+            }
+          }`,
+        } as any,
+      },
+    });
+
+    return post;
   }
 }
