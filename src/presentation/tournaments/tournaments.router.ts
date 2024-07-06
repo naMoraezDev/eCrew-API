@@ -29,7 +29,7 @@ export async function tournamentsRouter(app: FastifyInstance) {
     "/csgo/tournaments/running",
     {
       schema: {
-        tags: ["tournament"],
+        tags: ["tournaments"],
         summary: "Get a list of running CS:GO tournaments.",
         response: {
           200: tournamentListSchema,
@@ -47,7 +47,7 @@ export async function tournamentsRouter(app: FastifyInstance) {
     "/lol/tournaments/running",
     {
       schema: {
-        tags: ["tournament"],
+        tags: ["tournaments"],
         summary: "Get a list of running League of Legends tournaments.",
         response: {
           200: tournamentListSchema,
@@ -65,7 +65,7 @@ export async function tournamentsRouter(app: FastifyInstance) {
     "/dota2/tournaments/running",
     {
       schema: {
-        tags: ["tournament"],
+        tags: ["tournaments"],
         summary: "Get a list of running Dota 2 tournaments.",
         response: {
           200: tournamentListSchema,
@@ -83,7 +83,7 @@ export async function tournamentsRouter(app: FastifyInstance) {
     "/r6siege/tournaments/running",
     {
       schema: {
-        tags: ["tournament"],
+        tags: ["tournaments"],
         summary: "Get a list of running Rainbow Six Siege tournaments.",
         response: {
           200: tournamentListSchema,
@@ -101,7 +101,7 @@ export async function tournamentsRouter(app: FastifyInstance) {
     "/valorant/tournaments/running",
     {
       schema: {
-        tags: ["tournament"],
+        tags: ["tournaments"],
         summary: "Get a list of running Valorant tournaments.",
         response: {
           200: tournamentListSchema,
@@ -119,7 +119,7 @@ export async function tournamentsRouter(app: FastifyInstance) {
     "/tournaments/:slug",
     {
       schema: {
-        tags: ["tournament"],
+        tags: ["tournaments"],
         summary: "Get a single tournament (by slug).",
         params: z.object({
           slug: z.string(),

@@ -3,6 +3,7 @@ import { tagRouter } from "./tag/tag.router";
 import { postRouter } from "./post/post.router";
 import { gameRouter } from "./game/game.router";
 import { matchRouter } from "./match/match.router";
+import { teamsRouter } from "./teams/teams.router";
 import { healthRouter } from "./health/health.router";
 import { categoryRouter } from "./category/category.router";
 import { checkoutRouter } from "./checkout/checkout.router";
@@ -19,6 +20,7 @@ export async function routes(app: FastifyInstance) {
   app.register(categoryRouter);
   app.register(tagRouter);
   app.register(tournamentsRouter);
+  app.register(teamsRouter);
   app.register(matchRouter);
   app.register(gameRouter);
   app.register(userPreferencesRouter);
