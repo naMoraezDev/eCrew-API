@@ -35,4 +35,20 @@ export class WPGraphQLController {
     const post = await this.wpGraphQLService.getPostBySlug(slug);
     return reply.status(200).send(post);
   }
+
+  public async getPostsBySearchTerm(
+    request: FastifyRequest,
+    reply: FastifyReply
+  ) {
+    const query = request.query as {
+      term: string;
+      after?: string | null;
+      before?: string | null;
+      number?: string | null;
+    };
+    const posts = await this.wpGraphQLService.getPostsBySearchTerm({
+      ...query,
+    });
+    return reply.status(200).send(posts);
+  }
 }

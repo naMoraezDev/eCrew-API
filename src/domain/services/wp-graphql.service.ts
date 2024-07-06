@@ -25,4 +25,18 @@ export class WPGraphQLService implements WPGraphQLProtocol {
   public async getPostBySlug(slug: string) {
     return await this.wpGraphQLRepository.getPostBySlug(slug);
   }
+
+  public async getPostsBySearchTerm({
+    term,
+    after,
+    before,
+    number,
+  }: WPGraphQLProtocol.SearchParams) {
+    return await this.wpGraphQLRepository.getPostsBySearchTerm({
+      term,
+      after,
+      before,
+      number,
+    });
+  }
 }

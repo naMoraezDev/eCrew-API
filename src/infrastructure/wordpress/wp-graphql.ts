@@ -7,6 +7,13 @@ export namespace WPGraphQLProtocol {
     number?: string | null;
     before?: string | null;
   };
+
+  export type SearchParams = {
+    term: string;
+    after?: string | null;
+    number?: string | null;
+    before?: string | null;
+  };
 }
 
 export interface WPGraphQLProtocol {
@@ -18,6 +25,12 @@ export interface WPGraphQLProtocol {
   }: WPGraphQLProtocol.Params): Promise<any>;
   getCategoryBySlug(slug: string): Promise<any>;
   getPostBySlug(slug: string): Promise<any>;
+  getPostsBySearchTerm({
+    term,
+    after,
+    before,
+    number,
+  }: WPGraphQLProtocol.SearchParams): Promise<any>;
 }
 
 export class WPGraphQL implements WPGraphQLProtocol {
@@ -189,5 +202,69 @@ export class WPGraphQL implements WPGraphQLProtocol {
     });
 
     return post;
+  }
+
+  public async getPostsBySearchTerm({
+    term,
+    after = null,
+    before = null,
+    number = null,
+  }: WPGraphQLProtocol.SearchParams) {
+    const posts = await this.httpClient.request<any>({
+      input: `${this.baseUrl}`,
+      init: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {
+          query: `{
+            posts(where: { search: "${term}" }, after: "${after}", before: "${before}", first: ${number}) {
+              edges {
+                node {
+                  id
+                  slug
+                  title
+                  excerpt
+                  date
+                  modified
+                  featuredImage {
+                    node {
+                      sourceUrl
+                      sizes
+                      caption
+                    }
+                  }
+                  categories {
+                    edges {
+                      node {
+                        id
+                        slug
+                      }
+                    }
+                  }
+                  tags {
+                    edges {
+                      node {
+                        id
+                        slug
+                      }
+                    }
+                  }
+                }
+              }
+              pageInfo {
+                hasPreviousPage
+                hasNextPage
+                startCursor
+                endCursor
+              }
+            }
+          }`,
+        } as any,
+      },
+    });
+
+    return posts;
   }
 }
