@@ -12,6 +12,16 @@ export class MatchRepository implements MatchServiceProtocol {
     );
     return matchData;
   }
+
+  public async getMatchList(
+    query: typeof matchListQuerySchema._type
+  ): Promise<typeof matchListSchema._type> {
+    const matchListData = await new Pandascore(
+      httpClientFactory()
+    ).getMatchList(query);
+    return matchListData;
+  }
+
   public async getUpcomingMatchList(
     query: typeof matchListQuerySchema._type
   ): Promise<typeof matchListSchema._type> {

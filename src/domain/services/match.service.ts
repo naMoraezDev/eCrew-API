@@ -5,6 +5,9 @@ import { MatchRepository } from "../../infrastructure/repositories/match.reposit
 
 export interface MatchServiceProtocol {
   getMatchById(id: string): Promise<typeof matchSchema._type>;
+  getMatchList(
+    query: typeof matchListQuerySchema._type
+  ): Promise<typeof matchListSchema._type>;
   getUpcomingMatchList(
     query: typeof matchListQuerySchema._type
   ): Promise<typeof matchListSchema._type>;
@@ -18,6 +21,10 @@ export class MatchService implements MatchServiceProtocol {
 
   public async getMatchById(id: string) {
     return await this.matchRepository.getMatchById(id);
+  }
+
+  public async getMatchList(query: typeof matchListQuerySchema._type) {
+    return await this.matchRepository.getMatchList(query);
   }
 
   public async getUpcomingMatchList(query: typeof matchListQuerySchema._type) {

@@ -33,6 +33,25 @@ export async function matchRouter(app: FastifyInstance) {
   );
 
   app.get(
+    "/matches",
+    {
+      schema: {
+        tags: ["matches"],
+        summary: "Get a list of all matches.",
+        querystring: matchListQuerySchema,
+        response: {
+          200: formattedMatchListSchema,
+        },
+      },
+    },
+    async (request, reply) => {
+      await new MatchController(
+        new MatchService(new MatchRepository())
+      ).getMatchList(request, reply);
+    }
+  );
+
+  app.get(
     "/matches/upcoming",
     {
       schema: {

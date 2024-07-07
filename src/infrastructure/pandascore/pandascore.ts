@@ -13,6 +13,9 @@ namespace PandascoreProtocol {
 
 interface PandascoreProtocol {
   getMatchById(id: string): Promise<typeof matchSchema._type>;
+  getMatchList: (
+    query: typeof matchListQuerySchema._type
+  ) => Promise<typeof matchListSchema._type>;
   getUpcomingMatchList: (
     query: typeof matchListQuerySchema._type
   ) => Promise<typeof matchListSchema._type>;
@@ -77,6 +80,33 @@ export class Pandascore implements PandascoreProtocol {
       },
     });
     return matchData;
+  }
+
+  public async getMatchList(query: typeof matchListQuerySchema._type) {
+    const matchListData = await this.httpClient.request<
+      typeof matchListSchema._type
+    >({
+      input: `${this.baseUrl}/matches${
+        query?.page || query?.filter || query?.per_page || query?.filter_type
+          ? "?"
+          : ""
+      }${
+        query?.filter
+          ? `&filter${query?.filter_type ? `[${query?.filter_type}]` : ""}=${
+              query?.filter
+            }`
+          : ""
+      }${query?.per_page ? `&per_page=${query?.per_page}` : ""}${
+        query?.page ? `&page=${query?.page}` : ""
+      }`,
+      init: {
+        method: "GET",
+        headers: {
+          Authorization: this.apiKey,
+        },
+      },
+    });
+    return matchListData;
   }
 
   public async getUpcomingMatchList(query: typeof matchListQuerySchema._type) {

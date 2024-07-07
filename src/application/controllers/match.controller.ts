@@ -17,6 +17,13 @@ export class MatchController {
     return reply.status(200).send(formatMatch(match));
   }
 
+  public async getMatchList(request: FastifyRequest, reply: FastifyReply) {
+    const query = request.query as typeof matchListQuerySchema._type;
+    const matchList = await this.matchService.getMatchList(query);
+    // await saveDataToCache(request, matchList);
+    return reply.status(200).send(formatMatches(matchList));
+  }
+
   public async getUpcomingMatchList(
     request: FastifyRequest,
     reply: FastifyReply
