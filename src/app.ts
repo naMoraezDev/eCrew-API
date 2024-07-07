@@ -52,7 +52,7 @@ app.register(fastifySwagger, {
     consumes: ["application/json"],
     produces: ["application/json"],
     info: {
-      title: "ePosts API",
+      title: "eCrew API",
       version: packageJSON.version,
     },
   },
@@ -62,12 +62,12 @@ app.register(fastifySwagger, {
 app.register(fastifySwaggerUI, {
   routePrefix: "/swagger",
   theme: {
-    title: "ePosts API",
+    title: "eCrew API",
     css: [
       {
         filename: "theme.css",
         content:
-          'body { padding-bottom: 80px } .topbar { position: sticky } .topbar { top: 0 } .topbar { z-index: 1 } .topbar { width: 100% } .link img { display: none } .link:after { content: "ePosts" }',
+          'body { padding-bottom: 80px } .topbar { position: sticky } .topbar { top: 0 } .topbar { z-index: 1 } .topbar { width: 100% } .link img { display: none } .link:after { content: "eCrew" }',
       },
     ],
   },
