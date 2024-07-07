@@ -1,4 +1,5 @@
 import { teamSchema } from "../../domain/schemas/team/team.schema";
+import { matchSchema } from "../../domain/schemas/match/match.schema";
 import { HttpClient } from "../adapters/factories/http-client.factory";
 import { teamListSchema } from "../../domain/schemas/team/team-list.schema";
 import { matchListSchema } from "../../domain/schemas/match/match-list.schema";
@@ -11,6 +12,7 @@ namespace PandascoreProtocol {
 }
 
 interface PandascoreProtocol {
+  getMatchById(id: string): Promise<typeof matchSchema._type>;
   getUpcomingMatchList: (
     query: typeof matchListQuerySchema._type
   ) => Promise<typeof matchListSchema._type>;
@@ -63,6 +65,19 @@ export class Pandascore implements PandascoreProtocol {
   private readonly baseUrl: string = process.env.PANDASCORE_API_URL ?? "";
 
   private readonly apiKey: string = process.env.PANDASCORE_API_KEY ?? "";
+
+  public async getMatchById(id: string): Promise<typeof matchSchema._type> {
+    const matchData = await this.httpClient.request<typeof matchSchema._type>({
+      input: `${this.baseUrl}/matches/${id}`,
+      init: {
+        method: "GET",
+        headers: {
+          Authorization: this.apiKey,
+        },
+      },
+    });
+    return matchData;
+  }
 
   public async getUpcomingMatchList(query: typeof matchListQuerySchema._type) {
     const matchListData = await this.httpClient.request<

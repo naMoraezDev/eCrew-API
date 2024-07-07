@@ -1,34 +1,32 @@
 import { Pandascore } from "../pandascore/pandascore";
-import { formatMatches } from "../utils/format-matches";
+import { matchSchema } from "../../domain/schemas/match/match.schema";
+import { MatchServiceProtocol } from "../../domain/services/match.service";
 import { httpClientFactory } from "../adapters/factories/http-client.factory";
+import { matchListSchema } from "../../domain/schemas/match/match-list.schema";
 import { matchListQuerySchema } from "../../domain/schemas/match/match-list-query.schema";
-import { formattedMatchListSchema } from "../../domain/schemas/match/formatted-match-list.schema";
 
-export interface MatchRepositoryProtocol {
-  getUpcomingMatchList(
-    query: typeof matchListQuerySchema._type
-  ): Promise<typeof formattedMatchListSchema._type>;
-  getRunningMatchList(
-    query: typeof matchListQuerySchema._type
-  ): Promise<typeof formattedMatchListSchema._type>;
-}
-
-export class MatchRepository implements MatchRepositoryProtocol {
+export class MatchRepository implements MatchServiceProtocol {
+  public async getMatchById(id: string): Promise<typeof matchSchema._type> {
+    const matchData = await new Pandascore(httpClientFactory()).getMatchById(
+      id
+    );
+    return matchData;
+  }
   public async getUpcomingMatchList(
     query: typeof matchListQuerySchema._type
-  ): Promise<typeof formattedMatchListSchema._type> {
+  ): Promise<typeof matchListSchema._type> {
     const matchListData = await new Pandascore(
       httpClientFactory()
     ).getUpcomingMatchList(query);
-    return formatMatches(matchListData);
+    return matchListData;
   }
 
   public async getRunningMatchList(
     query: typeof matchListQuerySchema._type
-  ): Promise<typeof formattedMatchListSchema._type> {
+  ): Promise<typeof matchListSchema._type> {
     const matchListData = await new Pandascore(
       httpClientFactory()
     ).getRunningMatchList(query);
-    return formatMatches(matchListData);
+    return matchListData;
   }
 }

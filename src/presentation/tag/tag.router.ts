@@ -14,7 +14,7 @@ export async function tagRouter(app: FastifyInstance) {
     "/tags",
     {
       schema: {
-        tags: ["tags"],
+        tags: ["wp-public"],
         summary: "Get a list of tags.",
         response: {
           200: tagListSchema,

@@ -2,6 +2,8 @@ import { z } from "zod";
 
 export const formattedMatchListSchema = z.array(
   z.object({
+    id: z.number().nullable(),
+    slug: z.string().nullable(),
     videogame: z.object({
       id: z.number().nullable(),
       name: z.string().nullable(),
@@ -13,6 +15,23 @@ export const formattedMatchListSchema = z.array(
       slug: z.string().nullable(),
       image_url: z.string().nullable(),
     }),
+    tournament: z.object({
+      begin_at: z.string().nullable(),
+      detailed_stats: z.boolean().nullable(),
+      end_at: z.string().nullable(),
+      has_bracket: z.boolean().nullable(),
+      id: z.number().nullable(),
+      league_id: z.number().nullable(),
+      live_supported: z.boolean().nullable(),
+      modified_at: z.string().nullable(),
+      name: z.string().nullable(),
+      prizepool: z.string().nullable(),
+      serie_id: z.number().nullable(),
+      slug: z.string().nullable(),
+      tier: z.string().nullable(),
+      winner_id: z.number().nullable(),
+      winner_type: z.string().nullable(),
+    }),
     status: z.string().nullable(),
     name: z.string().nullable(),
     begin_at: z.string().nullable(),
@@ -21,7 +40,7 @@ export const formattedMatchListSchema = z.array(
         main: z.boolean(),
         raw_url: z.string().nullable(),
         language: z.string().nullable(),
-        official: z.boolean(),
+        official: z.boolean().nullable(),
         embed_url: z.string().nullable(),
       })
     ),
