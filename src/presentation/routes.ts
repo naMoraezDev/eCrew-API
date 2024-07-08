@@ -5,6 +5,7 @@ import { gameRouter } from "./game/game.router";
 import { matchRouter } from "./match/match.router";
 import { teamsRouter } from "./teams/teams.router";
 import { healthRouter } from "./health/health.router";
+import { twitchRouter } from "./twitch/twitch.router";
 import { categoryRouter } from "./category/category.router";
 import { checkoutRouter } from "./checkout/checkout.router";
 import { webhooksRouter } from "./webhooks/webhooks.router";
@@ -27,4 +28,5 @@ export async function routes(app: FastifyInstance) {
   app.register(checkoutRouter);
   app.register(newsletterRouter);
   app.register(webhooksRouter);
+  app.register(twitchRouter);
 }
