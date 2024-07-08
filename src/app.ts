@@ -26,11 +26,7 @@ mongoDBConnect();
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyCors, {
-  origin: [
-    "http://localhost:3000",
-    "https://eposts.pages.dev",
-    "https://eposts.vercel.app",
-  ],
+  origin: ["http://localhost:3000", "https://eposts.vercel.app"],
 });
 
 app.register(require("@fastify/static"), {
@@ -79,7 +75,7 @@ app.setSerializerCompiler(serializerCompiler);
 app.register(fastifyExpress);
 app.register(routes, { prefix: "/api/v1" });
 
-//app.setErrorHandler(errorHandler);
+app.setErrorHandler(errorHandler);
 
 app.register(models);
 
