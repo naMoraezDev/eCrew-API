@@ -8,7 +8,7 @@ export async function viewRouter(app: FastifyInstance) {
       title: "eCrew API",
       version: packageJSON.version,
       docs: `${request.protocol}://${request.hostname}/swagger`,
-      repository: "https://github.com/naMoraezDev/eposts-api",
+      repository: "https://github.com/naMoraezDev/eCrew-API/",
     });
   });
 }
