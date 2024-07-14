@@ -4,6 +4,7 @@ import { UserPreferencesRepository } from "../../infrastructure/repositories/use
 export namespace UserPreferencesServiceProtocol {
   export type Preferences = {
     newsletter?: boolean;
+    saved_posts?: string[];
     subscription?: boolean;
     stripe_customer_id?: string;
   };

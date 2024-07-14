@@ -24,7 +24,7 @@ export class UserPreferencesRepository
       return null;
     }
     const newUserPreferences = await userPreferencesModel.create({
-      ...params,
+      ...params.preferences,
       uid: params.uid,
     });
     return newUserPreferences as typeof userPreferencesSchema._type;
@@ -39,7 +39,7 @@ export class UserPreferencesRepository
           uid: params.uid,
         },
         {
-          ...params,
+          ...params.preferences,
         }
       )
       .exec();
