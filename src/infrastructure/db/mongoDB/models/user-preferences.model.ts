@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const preferencesSchema = new mongoose.Schema(
+const userPreferencesSchema = new mongoose.Schema(
   {
     uid: {
       type: String,
@@ -14,15 +14,15 @@ const preferencesSchema = new mongoose.Schema(
       type: Boolean,
       required: false,
     },
-    newsletter: {
-      type: Boolean,
+    saved_posts: {
+      type: [String],
       required: false,
     },
   },
   { timestamps: true }
 );
 
-export const preferencesModel = mongoose.model(
-  "Preferences",
-  preferencesSchema
+export const userPreferencesModel = mongoose.model(
+  "User_Preferences",
+  userPreferencesSchema
 );

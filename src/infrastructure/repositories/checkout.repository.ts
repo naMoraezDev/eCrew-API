@@ -1,6 +1,6 @@
 import { stripe } from "../stripe/stripe";
-import { preferencesModel } from "../db/mongoDB/models/preferences.model";
 import { checkoutSchema } from "../../domain/schemas/checkout/checkout.schema";
+import { userPreferencesModel } from "../db/mongoDB/models/user-preferences.model";
 
 export interface CheckoutRepositoryProtocol {
   checkout(uid: string, email: string): Promise<typeof checkoutSchema._type>;
@@ -11,9 +11,9 @@ export class CheckoutRepository implements CheckoutRepositoryProtocol {
     uid: string,
     email: string
   ): Promise<typeof checkoutSchema._type> {
-    let preferences = await preferencesModel.findOne({ uid }).exec();
+    let preferences = await userPreferencesModel.findOne({ uid }).exec();
     if (!preferences) {
-      preferences = await preferencesModel.create({
+      preferences = await userPreferencesModel.create({
         uid,
       });
     }
@@ -22,7 +22,7 @@ export class CheckoutRepository implements CheckoutRepositoryProtocol {
       customer = await stripe.customers.create({
         email,
       });
-      await preferencesModel
+      await userPreferencesModel
         .updateOne({ uid }, { stripe_customer_id: customer.id })
         .exec();
     } else {

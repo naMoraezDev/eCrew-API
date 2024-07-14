@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import { stripe } from "../stripe/stripe";
 import { BadRequestError } from "../errors/error-instances/bad-request";
-import { preferencesModel } from "../db/mongoDB/models/preferences.model";
+import { userPreferencesModel } from "../db/mongoDB/models/user-preferences.model";
 
 export interface WebhooksRepositoryProtocol {
   listen(secret: string, buffer: Buffer): Promise<{ received: boolean }>;
@@ -33,7 +33,7 @@ export class WebhooksRepository implements WebhooksRepositoryProtocol {
           if (event.data.object.payment_status !== "paid") {
             break;
           }
-          await preferencesModel
+          await userPreferencesModel
             .updateOne(
               {
                 stripe_customer_id: event.data.object.customer,
@@ -45,7 +45,7 @@ export class WebhooksRepository implements WebhooksRepositoryProtocol {
             .exec();
           break;
         case "customer.subscription.deleted":
-          await preferencesModel.updateOne(
+          await userPreferencesModel.updateOne(
             {
               stripe_customer_id: event.data.object.customer,
             },
