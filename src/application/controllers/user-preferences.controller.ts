@@ -69,4 +69,34 @@ export class UserPreferencesController {
     });
     return reply.status(204).send("User preferences updated!");
   }
+
+  public async removeSavedPost(request: FastifyRequest, reply: FastifyReply) {
+    const headers = request.headers as { authorization: string };
+    const { authorization } = headers;
+    const decodedIdToken = await firebaseAdmin
+      .auth()
+      .verifyIdToken(authorization)
+      .catch(() => null);
+    const body = request.body as { postSlug: string };
+    await this.userPreferencesService.removeSavedPost({
+      postSlug: body.postSlug,
+      uid: decodedIdToken?.uid || "",
+    });
+    return reply.status(204).send("Post removed!");
+  }
+
+  public async pushToSavedPosts(request: FastifyRequest, reply: FastifyReply) {
+    const headers = request.headers as { authorization: string };
+    const { authorization } = headers;
+    const decodedIdToken = await firebaseAdmin
+      .auth()
+      .verifyIdToken(authorization)
+      .catch(() => null);
+    const body = request.body as { postSlug: string };
+    await this.userPreferencesService.pushToSavedPosts({
+      postSlug: body.postSlug,
+      uid: decodedIdToken?.uid || "",
+    });
+    return reply.status(204).send("Post pushed!");
+  }
 }

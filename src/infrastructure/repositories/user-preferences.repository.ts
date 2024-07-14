@@ -40,8 +40,33 @@ export class UserPreferencesRepository
         },
         {
           ...params.preferences,
+        }
+      )
+      .exec();
+  }
+
+  public async removeSavedPost(
+    params: UserPreferencesServiceProtocol.SavedPostsParams
+  ): Promise<void> {
+    await userPreferencesModel
+      .updateOne(
+        {
+          uid: params.uid,
         },
-        { $push: { saved_posts: params.preferences.saved_posts } }
+        { $pull: { saved_posts: params.postSlug } }
+      )
+      .exec();
+  }
+
+  public async pushToSavedPosts(
+    params: UserPreferencesServiceProtocol.SavedPostsParams
+  ): Promise<void> {
+    await userPreferencesModel
+      .updateOne(
+        {
+          uid: params.uid,
+        },
+        { $push: { saved_posts: params.postSlug } }
       )
       .exec();
   }

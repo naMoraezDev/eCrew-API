@@ -71,7 +71,6 @@ export async function userPreferencesRouter(app: FastifyInstance) {
           newsletter: z.boolean().nullable().optional(),
           subscription: z.boolean().nullable().optional(),
           stripe_customer_id: z.string().nullable().optional(),
-          saved_posts: z.array(z.string()).nullable().optional(),
         }),
         response: {
           204: z.string(),
@@ -82,6 +81,54 @@ export async function userPreferencesRouter(app: FastifyInstance) {
       await new UserPreferencesController(
         new UserPreferencesService(new UserPreferencesRepository())
       ).updateUserPreferences(request, reply);
+    }
+  );
+
+  app.put(
+    "/user/preferences/saved-posts/pull",
+    {
+      schema: {
+        tags: ["user preferences"],
+        summary: "Pulls a saved post from the user preferences.",
+        headers: z.object({
+          authorization: z.string(),
+        }),
+        body: z.object({
+          postSlug: z.string(),
+        }),
+        response: {
+          204: z.string(),
+        },
+      },
+    },
+    async (request, reply) => {
+      await new UserPreferencesController(
+        new UserPreferencesService(new UserPreferencesRepository())
+      ).removeSavedPost(request, reply);
+    }
+  );
+
+  app.put(
+    "/user/preferences/saved-posts/push",
+    {
+      schema: {
+        tags: ["user preferences"],
+        summary: "Pushes a saved post to the user preferences.",
+        headers: z.object({
+          authorization: z.string(),
+        }),
+        body: z.object({
+          postSlug: z.string(),
+        }),
+        response: {
+          204: z.string(),
+        },
+      },
+    },
+    async (request, reply) => {
+      await new UserPreferencesController(
+        new UserPreferencesService(new UserPreferencesRepository())
+      ).pushToSavedPosts(request, reply);
     }
   );
 }

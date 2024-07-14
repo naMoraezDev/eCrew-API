@@ -4,9 +4,13 @@ import { UserPreferencesRepository } from "../../infrastructure/repositories/use
 export namespace UserPreferencesServiceProtocol {
   export type Preferences = {
     newsletter?: boolean;
-    saved_posts?: string[];
     subscription?: boolean;
     stripe_customer_id?: string;
+  };
+
+  export type SavedPostsParams = {
+    uid: string;
+    postSlug: string;
   };
 
   export type Params = {
@@ -24,6 +28,13 @@ export interface UserPreferencesServiceProtocol {
   updateUserPreferences(
     params: UserPreferencesServiceProtocol.Params
   ): Promise<void>;
+
+  removeSavedPost(
+    params: UserPreferencesServiceProtocol.SavedPostsParams
+  ): void;
+  pushToSavedPosts(
+    params: UserPreferencesServiceProtocol.SavedPostsParams
+  ): void;
 }
 
 export class UserPreferencesService implements UserPreferencesServiceProtocol {
@@ -43,5 +54,17 @@ export class UserPreferencesService implements UserPreferencesServiceProtocol {
     params: UserPreferencesServiceProtocol.Params
   ) {
     return await this.userPreferencesRepository.updateUserPreferences(params);
+  }
+
+  public async removeSavedPost(
+    params: UserPreferencesServiceProtocol.SavedPostsParams
+  ) {
+    return await this.userPreferencesRepository.removeSavedPost(params);
+  }
+
+  public async pushToSavedPosts(
+    params: UserPreferencesServiceProtocol.SavedPostsParams
+  ) {
+    return await this.userPreferencesRepository.pushToSavedPosts(params);
   }
 }
