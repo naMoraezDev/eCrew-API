@@ -40,7 +40,8 @@ export class UserPreferencesRepository
         },
         {
           ...params.preferences,
-        }
+        },
+        { $push: { saved_posts: params.preferences.saved_posts } }
       )
       .exec();
   }
