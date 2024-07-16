@@ -1,6 +1,6 @@
 import { HttpClient } from "../adapters/factories/http-client.factory";
-import { postListSchema } from "../../domain/schemas/wp-graphql/post-list.schema";
 import { categorySchema } from "../../domain/schemas/wp-graphql/category.schema";
+import { postListSchema } from "../../domain/schemas/wp-graphql/post-list.schema";
 
 export namespace WPGraphQLProtocol {
   export type Params = {
@@ -56,7 +56,11 @@ export class WPGraphQL implements WPGraphQLProtocol {
         },
         body: {
           query: `{
-            posts(where: { categoryName: "${categorySlug}" }, after: "${after}", before: "${before}", first: ${number}) {
+            posts(${
+              categorySlug !== "all"
+                ? `where: { categoryName: "${categorySlug}" },`
+                : ""
+            } after: "${after}", before: "${before}", first: ${number}) {
               edges {
                 node {
                   id

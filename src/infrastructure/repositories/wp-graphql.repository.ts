@@ -22,6 +22,7 @@ export class WPGraphQLRepository implements WPGraphQLProtocol {
     );
     if (category.data.category.extraFields.featuredPosts) {
       const featuredPosts = Promise.all(
+        /* @ts-ignore */
         category.data.category.extraFields.featuredPosts.edges.map(
           async (post: any) => {
             return await new WPGraphQL(
