@@ -80,6 +80,7 @@ export class WPGraphQL implements WPGraphQLProtocol {
                     edges {
                       node {
                         id
+                        name
                         slug
                       }
                     }
@@ -88,6 +89,7 @@ export class WPGraphQL implements WPGraphQLProtocol {
                     edges {
                       node {
                         id
+                        name
                         slug
                       }
                     }
@@ -258,6 +260,7 @@ export class WPGraphQL implements WPGraphQLProtocol {
                       node {
                         id
                         slug
+                        name
                       }
                     }
                   }
@@ -266,6 +269,7 @@ export class WPGraphQL implements WPGraphQLProtocol {
                       node {
                         id
                         slug
+                        name
                       }
                     }
                   }

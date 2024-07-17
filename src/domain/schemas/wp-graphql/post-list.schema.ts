@@ -22,14 +22,22 @@ export const postListSchema = z.object({
             categories: z.object({
               edges: z.array(
                 z.object({
-                  node: z.object({ id: z.string(), slug: z.string() }),
+                  node: z.object({
+                    id: z.string(),
+                    slug: z.string(),
+                    name: z.string(),
+                  }),
                 })
               ),
             }),
             tags: z.object({
               edges: z.array(
                 z.object({
-                  node: z.object({ id: z.string(), slug: z.string() }),
+                  node: z.object({
+                    id: z.string(),
+                    slug: z.string(),
+                    name: z.string(),
+                  }),
                 })
               ),
             }),
@@ -53,14 +61,22 @@ export const postListSchema = z.object({
             categories: z.object({
               edges: z.array(
                 z.object({
-                  node: z.object({ id: z.string(), slug: z.string() }),
+                  node: z.object({
+                    id: z.string(),
+                    slug: z.string(),
+                    name: z.string(),
+                  }),
                 })
               ),
             }),
             tags: z.object({
               edges: z.array(
                 z.object({
-                  node: z.object({ id: z.string(), slug: z.string() }),
+                  node: z.object({
+                    id: z.string(),
+                    slug: z.string(),
+                    name: z.string(),
+                  }),
                 })
               ),
             }),
